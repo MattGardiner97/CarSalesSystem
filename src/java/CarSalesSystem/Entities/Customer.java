@@ -138,4 +138,5 @@ public class Customer implements Serializable {
     public void setCustomerOrders(List<CustomerOrder> customerOrders) {
         this.customerOrders = customerOrders;
     }
+
 }
