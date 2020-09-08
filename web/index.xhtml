@@ -6,9 +6,19 @@
         <title>Car Sales System</title>
     </h:head>
     <h:body>
-        <h1>Brand New and Used Cars</h1>
+        <div>
+            <h1>Create Data</h1>
+            <h:link value="Create a new car" outcome="createNewCar"/>
+        </div>
+        <div>
+            <h1>Retrieve Data</h1>
+            <h:link value="Retrieve car data" outcome="retrieveCar"/>
+            <br />
+            <h:link value="Retrieve customer data" outcome="retrieveCustomer"/>
+            <br />
+            <h:link value="Retrieve order data" outcome="retrieveOrder"/>
+        </div>
         
-        <h:link value="Create a new car" outcome="createNewCar"/>
     </h:body>
 </html>
 
