@@ -8,9 +8,38 @@
     <h:body>
         <h1>Create a new car</h1>
         <hr/>
-
+        
         <h:form>
-            <h:outputText value="test"/>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Reference Number: "/>
+                <h:inputText value="#{newCarController.car.referenceNumber}"/>
+                
+                <h:outputLabel value="Make: "/>
+                <h:inputText value="#{newCarController.car.make}"/>
+                
+                <h:outputLabel value="Model: "/>
+                <h:inputText value="#{newCarController.car.model}"/>
+                
+                <h:outputLabel value="Build Year: "/>
+                <h:inputText value="#{newCarController.car.buildYear}"/>
+                
+                <h:outputLabel value="Transmission: "/>
+                <h:inputText value="#{newCarController.car.transmission}"/>
+                
+                <h:outputLabel value="Drive Type: "/>
+                <h:inputText value="#{newCarController.car.driveType}"/>
+                
+                <h:outputLabel value="Engine: "/>
+                <h:inputText value="#{newCarController.car.engine}"/>
+                
+                <h:outputLabel value="Fuel Type: "/>
+                <h:inputText value="#{newCarController.car.fuelType}"/>
+                
+                <h:outputLabel value="Warranty Years: "/>
+                <h:inputText value="#{newCarController.car.warrantyYears}"/>
+            </h:panelGrid>
+            
+            <h:commandButton value="Save" action="#{newCarController.createCar}"/>
         </h:form>
     </h:body>
 </html>
