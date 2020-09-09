@@ -7,8 +7,6 @@ package CarSalesSystem.Entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
 import javax.persistence.*;
 
 @Entity
@@ -17,8 +15,6 @@ import javax.persistence.*;
     ,
     @NamedQuery(name = "customerFindByName", query = "SELECT c FROM Customer c WHERE lower(c.name) = lower(:name)") //Finds a customer by name
 })
-@Named(value = "Customer")
-@SessionScoped
 public class Customer implements Serializable {
 
     @Id

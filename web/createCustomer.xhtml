@@ -8,18 +8,21 @@
     <h:body>
         <h1>Create a Customer</h1>
         <hr/>
-
         <h:form>
-            <p>
-                Enter Name: <h:inputText id="customerName" size="10" value="#{Customer.name}" />
-                <br />
-                Enter Address: <h:inputText id="customerAddress" size="10" value="#{Customer.address}" />
-                <br />
-                Enter Phone: <h:inputText id="customerPhoneNumber" size="10" value="#{Customer.phoneNumber}" />
-                <br />
-                Enter Email: <h:inputText id="customerEmailAddress" size="10" value="#{Customer.emailAddress}" />
-            </p>
-            <h:commandButton id="submit" value="Submit" action="createConfirm"/>
+            <h:panelGrid columns="2" >
+                <h:outputLabel value="Name: "/>
+                <h:inputText value="#{customerController.customer.name}"/>
+
+                <h:outputLabel value="Address:"/>
+                <h:inputText value="#{customerController.customer.address}"/>
+
+                <h:outputLabel value="Phone Number: "/>
+                <h:inputText value="#{customerController.customer.phoneNumber}"/>
+
+                <h:outputLabel value="Email Address: "/>
+                <h:inputTextarea value="#{customerController.customer.emailAddress}" />
+            </h:panelGrid>
+            <h:commandButton value="Create Customer" action="#{customerController.createCustomer}"/>
         </h:form>
     </h:body>
 </html>
