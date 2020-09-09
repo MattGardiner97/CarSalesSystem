@@ -20,7 +20,7 @@ public class CustomerController {
     public String createCustomer() {
         customer = customerEJB.createCustomer(customer);
         customerList = customerEJB.findCustomer();
-        return "index.xhtml";
+        return "customerList.xhtml";
     }
 
     //Getters & Setters         
