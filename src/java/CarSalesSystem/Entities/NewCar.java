@@ -8,6 +8,9 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "newCarFindAll", query = "SELECT c FROM Car c"), //Retrieves all cars from the database
+})
 @Inheritance(strategy = InheritanceType.JOINED) //Indicates to use the joined-subclass strategy
 public class NewCar extends Car implements Serializable {
 
