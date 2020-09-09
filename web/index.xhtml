@@ -7,8 +7,14 @@
     </h:head>
     <h:body>
         <div>
-            <h1>Create Data</h1>
-            <h:link value="Create a new car" outcome="createNewCar"/>
+            <h1>Brand New and Used Cars</h1>
+            <div>
+            <h:link value="Create a new car" outcome="/NewCar/createNewCar"/>
+            <h:link value="The list of new cars" outcome="/NewCar/listNewCars"/>
+            <h:link value="Search for a new car" outcome="searchNewCars"/>
+            </div>
+            
+            
             <br />
             <h:link value="Create a new customer" outcome="createCustomer"/>
         </div>
