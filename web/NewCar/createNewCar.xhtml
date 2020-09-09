@@ -37,6 +37,12 @@
                 
                 <h:outputLabel value="Warranty Years: "/>
                 <h:inputText value="#{newCarController.car.warrantyYears}"/>
+                
+                <h:outputLabel value="Extended Warranty Years: "/>
+                <h:inputText value="#{newCarController.car.extendedWarrantyYears}"/>
+                
+                <h:outputLabel value="Accessories: "/>
+                <h:inputText value="#{newCarController.car.accessories}"/>
             </h:panelGrid>
             
             <h:commandButton value="Save" action="#{newCarController.createCar}"/>
