@@ -33,6 +33,7 @@ public class CustomerController {
     }
 
     public List<CarSalesSystem.Entities.Customer> getCustomerList() {
+        customerList = customerEJB.findCustomer();
         return customerList;
     }
 
