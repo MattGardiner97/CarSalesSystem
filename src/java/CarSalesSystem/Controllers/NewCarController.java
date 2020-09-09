@@ -7,6 +7,8 @@ package CarSalesSystem.Controllers;
 
 import CarSalesSystem.EJB.NewCarEJB;
 import CarSalesSystem.Entities.NewCar;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.inject.Named;
@@ -24,9 +26,11 @@ public class NewCarController {
     @EJB
     private NewCarEJB carEJB;
     private NewCar car = new NewCar();
+    private List<NewCar> carList = new ArrayList<NewCar>();
     
     
     public NewCarController() {
+        
     }
     
     public NewCar getCar(){
@@ -36,9 +40,20 @@ public class NewCarController {
         this.car = car;
     }
     
+    public List<NewCar> getCarList(){
+        return this.carList;
+    }
+    public void setCarList(List<NewCar> carList){
+        this.carList = carList;
+    }
+    
     public String createCar(){
         carEJB.createNewCar(car);
-        return "index.xhtml";
+        return "/index.xhtml";
+    }
+    
+    public void loadCarList(){
+        this.carList = carEJB.getCarList();
     }
     
 }
