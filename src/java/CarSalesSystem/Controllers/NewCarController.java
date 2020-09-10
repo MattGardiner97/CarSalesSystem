@@ -27,12 +27,29 @@ public class NewCarController {
     private NewCarEJB carEJB;
     private NewCar car = new NewCar();
     private List<NewCar> carList = new ArrayList<NewCar>();
+    private String searchReferenceNumber = "";
+    private List<NewCar> searchResults = new ArrayList<NewCar>();
     
     
     public NewCarController() {
         
     }
     
+    public String createCar(){
+        carEJB.createNewCar(car);
+        return "/index.xhtml";
+    }
+    
+    public void loadCarList(){
+        this.carList = carEJB.getCarList();
+    }
+    
+    public String performSearch(){
+        this.setSearchResults(carEJB.searchByReferenceNumber(searchReferenceNumber));
+        return "/NewCar/searchResults.xhtml";
+    }
+    
+    //Getters & Setters
     public NewCar getCar(){
         return this .car;
     }
@@ -47,13 +64,34 @@ public class NewCarController {
         this.carList = carList;
     }
     
-    public String createCar(){
-        carEJB.createNewCar(car);
-        return "/index.xhtml";
-    }
     
-    public void loadCarList(){
-        this.carList = carEJB.getCarList();
+
+    /**
+     * @return the searchReferenceNumber
+     */
+    public String getSearchReferenceNumber() {
+        return searchReferenceNumber;
+    }
+
+    /**
+     * @param searchReferenceNumber the searchReferenceNumber to set
+     */
+    public void setSearchReferenceNumber(String searchReferenceNumber) {
+        this.searchReferenceNumber = searchReferenceNumber;
+    }
+
+    /**
+     * @return the searchResults
+     */
+    public List<NewCar> getSearchResults() {
+        return searchResults;
+    }
+
+    /**
+     * @param searchResults the searchResults to set
+     */
+    public void setSearchResults(List<NewCar> searchResults) {
+        this.searchResults = searchResults;
     }
     
 }

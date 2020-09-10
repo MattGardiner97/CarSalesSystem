@@ -25,5 +25,11 @@ public class NewCarEJB {
         TypedQuery<NewCar> query = em.createNamedQuery("newCarFindAll",NewCar.class);
         return query.getResultList();
     }
+    
+    public List<NewCar> searchByReferenceNumber(String referenceNumber){
+        TypedQuery<NewCar> query = em.createNamedQuery("newCarFindByReference",NewCar.class);
+        query.setParameter("referenceNumber", referenceNumber);
+        return query.getResultList();
+    }
 
 }
