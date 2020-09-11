@@ -5,8 +5,8 @@
  */
 package CarSalesSystem.Controllers;
 
-import CarSalesSystem.EJB.NewCarEJB;
-import CarSalesSystem.Entities.NewCar;
+import CarSalesSystem.EJB.UsedCarEJB;
+import CarSalesSystem.Entities.UsedCar;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -22,23 +22,23 @@ import javax.faces.context.FacesContext;
  * @author Matt
  */
 @ManagedBean
-@Named(value = "newCarController")
+@Named(value = "usedCarController")
 @RequestScoped
-public class NewCarController {
+public class UsedCarController {
     @EJB
-    private NewCarEJB carEJB;
-    private NewCar car = new NewCar();
-    private List<NewCar> carList = new ArrayList<NewCar>();
+    private UsedCarEJB carEJB;
+    private UsedCar car = new UsedCar();
+    private List<UsedCar> carList = new ArrayList<UsedCar>();
     private String searchReferenceNumber = "";
-    private List<NewCar> searchResults = new ArrayList<NewCar>();
+    private List<UsedCar> searchResults = new ArrayList<UsedCar>();
     
     
-    public NewCarController() {
+    public UsedCarController() {
         
     }
     
     public String createCar(){
-        carEJB.createNewCar(car);
+        carEJB.createUsedCar(car);
         return "/index.xhtml";
     }
     
@@ -47,28 +47,27 @@ public class NewCarController {
     }
     
     public String performSearch(){
-        this.setSearchResults(carEJB.searchByReferenceNumber(searchReferenceNumber));
         this.searchResults = carEJB.searchByReferenceNumber(searchReferenceNumber);
         if(this.searchResults.isEmpty())
         {
             FacesContext.getCurrentInstance().addMessage(searchReferenceNumber, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No car found for reference number: ".concat(searchReferenceNumber),null));
             return null;
         }
-        return "/NewCar/searchResults.xhtml";
+        return "/UsedCar/searchResults.xhtml";
     }
     
     //Getters & Setters
-    public NewCar getCar(){
+    public UsedCar getCar(){
         return this .car;
     }
-    public void setCar(NewCar car){
+    public void setCar(UsedCar car){
         this.car = car;
     }
     
-    public List<NewCar> getCarList(){
+    public List<UsedCar> getCarList(){
         return this.carList;
     }
-    public void setCarList(List<NewCar> carList){
+    public void setCarList(List<UsedCar> carList){
         this.carList = carList;
     }
     
@@ -91,14 +90,14 @@ public class NewCarController {
     /**
      * @return the searchResults
      */
-    public List<NewCar> getSearchResults() {
+    public List<UsedCar> getSearchResults() {
         return searchResults;
     }
 
     /**
      * @param searchResults the searchResults to set
      */
-    public void setSearchResults(List<NewCar> searchResults) {
+    public void setSearchResults(List<UsedCar> searchResults) {
         this.searchResults = searchResults;
     }
     

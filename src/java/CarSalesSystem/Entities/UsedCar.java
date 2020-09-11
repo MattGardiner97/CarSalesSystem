@@ -9,6 +9,10 @@ import java.time.LocalDate;
 import javax.persistence.*;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "usedCarFindAll", query = "SELECT c FROM UsedCar c"), //Retrieves all cars from the database
+    @NamedQuery(name = "usedCarFindByReference", query = "SELECT c FROM UsedCar c WHERE c.referenceNumber = :referenceNumber") //Retrieves a car by reference number
+})
 @Inheritance(strategy = InheritanceType.JOINED) //Indicates to use the joined-subclass strategy
 public class UsedCar extends Car implements Serializable {
 
@@ -17,9 +21,6 @@ public class UsedCar extends Car implements Serializable {
 
     @Column(nullable = false)
     private String registrationNumber;
-
-    @Column(nullable = false)
-    private LocalDate registrationExpiry;
 
     private String history;
 
@@ -35,7 +36,6 @@ public class UsedCar extends Car implements Serializable {
 
         this.odometer = odometer;
         this.registrationNumber = registrationNumber;
-        this.registrationExpiry = registrationExpiry;
     }
 
     //Constructor with required and non-required fields
@@ -46,7 +46,6 @@ public class UsedCar extends Car implements Serializable {
 
         this.odometer = odometer;
         this.registrationNumber = registrationNumber;
-        this.registrationExpiry = registrationExpiry;
         this.history = history;
     }
 
@@ -76,20 +75,6 @@ public class UsedCar extends Car implements Serializable {
      */
     public void setRegistrationNumber(String registrationNumber) {
         this.registrationNumber = registrationNumber;
-    }
-
-    /**
-     * @return the registrationExpiry
-     */
-    public LocalDate getRegistrationExpiry() {
-        return registrationExpiry;
-    }
-
-    /**
-     * @param registrationExpiry the registrationExpiry to set
-     */
-    public void setRegistrationExpiry(LocalDate registrationExpiry) {
-        this.registrationExpiry = registrationExpiry;
     }
 
     /**
