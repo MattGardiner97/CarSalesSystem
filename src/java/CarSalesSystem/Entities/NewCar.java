@@ -13,30 +13,16 @@ import javax.persistence.*;
     @NamedQuery(name = "newCarFindByReference", query = "SELECT c FROM NewCar c WHERE c.referenceNumber = :referenceNumber") //Retrieves a car by reference number
 })
 @Inheritance(strategy = InheritanceType.JOINED) //Indicates to use the joined-subclass strategy
-public class NewCar extends Car implements Serializable {
-
+public class NewCar extends Car implements Serializable {    
     @Column(nullable = false)
     private int warrantyYears;
 
     private int extendedWarrantyYears;
-    private String accessories;
+    private String roadsideAssistance;
+    private String quantity;
 
     //Standard constructor
     public NewCar() {
-    }
-
-    //Constructor containing all required fields
-    public NewCar(String referenceNumber, String make, String model, int buildYear, String transmission, String driveType, String engine, String fuelType, int warrantyYears) {
-        super(referenceNumber, make, model, buildYear, transmission, driveType, engine, fuelType);
-        this.warrantyYears = warrantyYears;
-    }
-
-    //COnstructor containing required and non-required fields
-    public NewCar(String referenceNumber, String make, String model, int buildYear, String transmission, String driveType, String engine, String fuelType, int warrantyYears, int extendedWarrantyYears, String accessories) {
-        super(referenceNumber, make, model, buildYear, transmission, driveType, engine, fuelType);
-        this.warrantyYears = warrantyYears;
-        this.extendedWarrantyYears = extendedWarrantyYears;
-        this.accessories = accessories;
     }
 
     /**
@@ -68,16 +54,31 @@ public class NewCar extends Car implements Serializable {
     }
 
     /**
-     * @return the accessories
+     * @return the roadsideAssistance
      */
-    public String getAccessories() {
-        return accessories;
+    public String getRoadsideAssistance() {
+        return roadsideAssistance;
     }
 
     /**
-     * @param accessories the accessories to set
+     * @param roadsideAssistance the roadsideAssistance to set
      */
-    public void setAccessories(String accessories) {
-        this.accessories = accessories;
+    public void setRoadsideAssistance(String roadsideAssistance) {
+        this.roadsideAssistance = roadsideAssistance;
     }
+
+    /**
+     * @return the quantity
+     */
+    public String getQuantity() {
+        return quantity;
+    }
+
+    /**
+     * @param quantity the quantity to set
+     */
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
 }

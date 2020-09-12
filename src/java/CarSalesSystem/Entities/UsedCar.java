@@ -16,37 +16,27 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED) //Indicates to use the joined-subclass strategy
 public class UsedCar extends Car implements Serializable {
 
+    
+    
     @Column(nullable = false)
     private int odometer;
 
     @Column(nullable = false)
     private String registrationNumber;
+    
+    @Column(nullable = false)
+    private int registrationExpiry;
+    
+    @Column(nullable = false)
+    private String serviceHistory;
+    
+    @Column(nullable = false)
+    private String vehicleIdentificationNumber;
 
     private String history;
 
     //Standard constructor
     public UsedCar() {
-    }
-
-    //Constructor with only required fields
-    public UsedCar(String referenceNumber, String make, String model, int buildYear, String transmission, String driveType, String engine, String fuelType,
-            int odometer, String registrationNumber, LocalDate registrationExpiry) {
-
-        super(referenceNumber, make, model, buildYear, transmission, driveType, engine, fuelType);
-
-        this.odometer = odometer;
-        this.registrationNumber = registrationNumber;
-    }
-
-    //Constructor with required and non-required fields
-    public UsedCar(String referenceNumber, String make, String model, int buildYear, String transmission, String driveType, String engine, String fuelType,
-            int odometer, String registrationNumber, LocalDate registrationExpiry, String history) {
-
-        super(referenceNumber, make, model, buildYear, transmission, driveType, engine, fuelType);
-
-        this.odometer = odometer;
-        this.registrationNumber = registrationNumber;
-        this.history = history;
     }
 
     /**
@@ -78,6 +68,48 @@ public class UsedCar extends Car implements Serializable {
     }
 
     /**
+     * @return the registrationExpiry
+     */
+    public int getRegistrationExpiry() {
+        return registrationExpiry;
+    }
+
+    /**
+     * @param registrationExpiry the registrationExpiry to set
+     */
+    public void setRegistrationExpiry(int registrationExpiry) {
+        this.registrationExpiry = registrationExpiry;
+    }
+
+    /**
+     * @return the serviceHistory
+     */
+    public String getServiceHistory() {
+        return serviceHistory;
+    }
+
+    /**
+     * @param serviceHistory the serviceHistory to set
+     */
+    public void setServiceHistory(String serviceHistory) {
+        this.serviceHistory = serviceHistory;
+    }
+
+    /**
+     * @return the vehicleIdentificationNumber
+     */
+    public String getVehicleIdentificationNumber() {
+        return vehicleIdentificationNumber;
+    }
+
+    /**
+     * @param vehicleIdentificationNumber the vehicleIdentificationNumber to set
+     */
+    public void setVehicleIdentificationNumber(String vehicleIdentificationNumber) {
+        this.vehicleIdentificationNumber = vehicleIdentificationNumber;
+    }
+
+    /**
      * @return the history
      */
     public String getHistory() {
@@ -90,4 +122,6 @@ public class UsedCar extends Car implements Serializable {
     public void setHistory(String history) {
         this.history = history;
     }
+
+    
 }

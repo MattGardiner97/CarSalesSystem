@@ -34,34 +34,31 @@ public abstract class Car implements Serializable {
     private String model;
 
     @Column(nullable = false)
-    private int buildYear;
+    private String driveType;
+
+    @Column(nullable = false)
+    private String colour;
 
     @Column(nullable = false)
     private String transmission;
-
-    @Column(nullable = false)
-    private String driveType;
 
     @Column(nullable = false)
     private String engine;
 
     @Column(nullable = false)
     private String fuelType;
+    
+    @Column(nullable = false)
+    private int doors;
+    
+    @Column(nullable = false)
+    private int seats;
+    
+    @Column(nullable = false)
+    private int price;
 
     //Default constructor
     public Car() {
-    }
-
-    //Constructor containing all required values
-    public Car(String referenceNumber, String make, String model, int buildYear, String transmission, String driveType, String engine, String fuelType) {
-        this.referenceNumber = referenceNumber;
-        this.make = make;
-        this.model = model;
-        this.buildYear = buildYear;
-        this.transmission = transmission;
-        this.driveType = driveType;
-        this.engine = engine;
-        this.fuelType = fuelType;
     }
 
     /**
@@ -76,6 +73,20 @@ public abstract class Car implements Serializable {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * @return the referenceNumber
+     */
+    public String getReferenceNumber() {
+        return referenceNumber;
+    }
+
+    /**
+     * @param referenceNumber the referenceNumber to set
+     */
+    public void setReferenceNumber(String referenceNumber) {
+        this.referenceNumber = referenceNumber;
     }
 
     /**
@@ -107,17 +118,31 @@ public abstract class Car implements Serializable {
     }
 
     /**
-     * @return the year
+     * @return the driveType
      */
-    public int getBuildYear() {
-        return buildYear;
+    public String getDriveType() {
+        return driveType;
     }
 
     /**
-     * @param buildYear the year to set
+     * @param driveType the driveType to set
      */
-    public void setBuildYear(int buildYear) {
-        this.buildYear = buildYear;
+    public void setDriveType(String driveType) {
+        this.driveType = driveType;
+    }
+
+    /**
+     * @return the colour
+     */
+    public String getColour() {
+        return colour;
+    }
+
+    /**
+     * @param colour the colour to set
+     */
+    public void setColour(String colour) {
+        this.colour = colour;
     }
 
     /**
@@ -163,30 +188,46 @@ public abstract class Car implements Serializable {
     }
 
     /**
-     * @return the driveType
+     * @return the doors
      */
-    public String getDriveType() {
-        return driveType;
+    public int getDoors() {
+        return doors;
     }
 
     /**
-     * @param driveType the driveType to set
+     * @param doors the doors to set
      */
-    public void setDriveType(String driveType) {
-        this.driveType = driveType;
+    public void setDoors(int doors) {
+        this.doors = doors;
     }
 
     /**
-     * @return the referenceNumber
+     * @return the seats
      */
-    public String getReferenceNumber() {
-        return referenceNumber;
+    public int getSeats() {
+        return seats;
     }
 
     /**
-     * @param referenceNumber the referenceNumber to set
+     * @param seats the seats to set
      */
-    public void setReferenceNumber(String referenceNumber) {
-        this.referenceNumber = referenceNumber;
+    public void setSeats(int seats) {
+        this.seats = seats;
     }
+
+    /**
+     * @return the price
+     */
+    public int getPrice() {
+        return price;
+    }
+
+    /**
+     * @param price the price to set
+     */
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    
 }
