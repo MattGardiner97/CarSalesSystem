@@ -15,6 +15,7 @@ import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -39,27 +40,41 @@ public class NewCarController {
     
     public String createCar(){
         carEJB.createNewCar(car);
-        return "/index.xhtml";
+        FacesContext.getCurrentInstance().addMessage(searchReferenceNumber, new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully created new car: ".concat(car.toString()),null));
+        return "/NewCar/listNewCars.xhtml";
     }
     
     public void loadCarList(){
         this.carList = carEJB.getCarList();
     }
-    
-    public String performSearch(){
-        this.setSearchResults(carEJB.searchByReferenceNumber(searchReferenceNumber));
-        this.searchResults = carEJB.searchByReferenceNumber(searchReferenceNumber);
+    public void loadSearchResults(){
+        this.searchResults = carEJB.searchByReferenceNumber(this.searchReferenceNumber);
         if(this.searchResults.isEmpty())
         {
             FacesContext.getCurrentInstance().addMessage(searchReferenceNumber, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No car found for reference number: ".concat(searchReferenceNumber),null));
-            return null;
         }
+    }
+    
+    public String performSearch(){
         return "/NewCar/searchResults.xhtml";
     }
     
+//    public String performSearch(){
+//        return performSearch(this.searchReferenceNumber);
+//    }
+//    public String performSearch(String referenceNumber){
+//        this.searchResults = carEJB.searchByReferenceNumber(referenceNumber);
+//        if(this.searchResults.isEmpty())
+//        {
+//            FacesContext.getCurrentInstance().addMessage(searchReferenceNumber, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No car found for reference number: ".concat(searchReferenceNumber),null));
+//            return null;
+//        }
+//        return "/NewCar/searchResults.xhtml";
+//    }
+    
     //Getters & Setters
     public NewCar getCar(){
-        return this .car;
+        return this.car;
     }
     public void setCar(NewCar car){
         this.car = car;
@@ -71,8 +86,6 @@ public class NewCarController {
     public void setCarList(List<NewCar> carList){
         this.carList = carList;
     }
-    
-    
 
     /**
      * @return the searchReferenceNumber

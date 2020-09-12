@@ -12,7 +12,7 @@
             <h:outputLabel value="Reference Number: "/>
             <h:inputText id="searchReferenceNumber" value="#{usedCarController.searchReferenceNumber}"/>
             <h:commandButton value="Search" action="#{usedCarController.performSearch()}"/>
-            <h:message style="color:red!important;" for="searchReferenceNumber" id="searchErrorMessage"/>
+            <h:message for="searchReferenceNumber" id="searchErrorMessage"/>
         </h:form>
     </h:body>
 </html>

@@ -20,14 +20,14 @@
                 <h:outputLabel value="Model: "/>
                 <h:inputText value="#{newCarController.car.model}"/>
                 
-                <h:outputLabel value="Build Year: "/>
-                <h:inputText value="#{newCarController.car.buildYear}"/>
+                <h:outputLabel value="Drive Type: "/>
+                <h:inputText value="#{newCarController.car.driveType}"/>
+                
+                <h:outputLabel value="Colour: "/>
+                <h:inputText value="#{newCarController.car.colour}"/>
                 
                 <h:outputLabel value="Transmission: "/>
                 <h:inputText value="#{newCarController.car.transmission}"/>
-                
-                <h:outputLabel value="Drive Type: "/>
-                <h:inputText value="#{newCarController.car.driveType}"/>
                 
                 <h:outputLabel value="Engine: "/>
                 <h:inputText value="#{newCarController.car.engine}"/>
@@ -35,14 +35,23 @@
                 <h:outputLabel value="Fuel Type: "/>
                 <h:inputText value="#{newCarController.car.fuelType}"/>
                 
+                <h:outputLabel value="Doors: "/>
+                <h:inputText value="#{newCarController.car.doors}"/>
+                
+                <h:outputLabel value="Seats: "/>
+                <h:inputText value="#{newCarController.car.seats}"/>
+                
                 <h:outputLabel value="Warranty Years: "/>
                 <h:inputText value="#{newCarController.car.warrantyYears}"/>
                 
                 <h:outputLabel value="Extended Warranty Years: "/>
                 <h:inputText value="#{newCarController.car.extendedWarrantyYears}"/>
                 
-                <h:outputLabel value="Accessories: "/>
-                <h:inputText value="#{newCarController.car.accessories}"/>
+                <h:outputLabel value="Roadside Assistance: "/>
+                <h:inputText value="#{newCarController.car.roadsideAssistance}"/>
+                
+                <h:outputLabel value="Quantity: "/>
+                <h:inputText value="#{newCarController.car.quantity}"/>
             </h:panelGrid>
             
             <h:commandButton value="Save" action="#{newCarController.createCar}"/>

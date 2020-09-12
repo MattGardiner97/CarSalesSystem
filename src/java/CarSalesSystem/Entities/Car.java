@@ -24,7 +24,7 @@ public abstract class Car implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     private String referenceNumber;
 
     @Column(nullable = false)
@@ -227,6 +227,11 @@ public abstract class Car implements Serializable {
      */
     public void setPrice(int price) {
         this.price = price;
+    }
+    
+    @Override
+    public String toString(){
+        return String.format("%s %s", this.make,this.model);
     }
 
     
