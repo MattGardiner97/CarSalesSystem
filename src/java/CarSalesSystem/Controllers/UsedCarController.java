@@ -38,21 +38,23 @@ public class UsedCarController {
     }
     
     public String createCar(){
-        carEJB.createUsedCar(car);
-        return "/index.xhtml";
+         carEJB.createUsedCar(car);
+        FacesContext.getCurrentInstance().addMessage(searchReferenceNumber, new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully created used car: ".concat(car.toString()),null));
+        return "/UsedCar/listUsedCars.xhtml";
     }
     
     public void loadCarList(){
         this.carList = carEJB.getCarList();
     }
-    
-    public String performSearch(){
-        this.searchResults = carEJB.searchByReferenceNumber(searchReferenceNumber);
+    public void loadSearchResults(){
+        this.searchResults = carEJB.searchByReferenceNumber(this.searchReferenceNumber);
         if(this.searchResults.isEmpty())
         {
             FacesContext.getCurrentInstance().addMessage(searchReferenceNumber, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No car found for reference number: ".concat(searchReferenceNumber),null));
-            return null;
         }
+    }
+    
+    public String performSearch(){
         return "/UsedCar/searchResults.xhtml";
     }
     

@@ -7,11 +7,12 @@
     </h:head>
     <h:body>
         <h1>Search for a new car</h1>
-        
-        <h:form >
+
+        <h:form>
             <h:outputLabel value="Reference Number: "/>
-            <h:inputText value="#{newCarController.searchReferenceNumber}"/>
+            <h:inputText id="searchReferenceNumber" value="#{newCarController.searchReferenceNumber}"/>
             <h:commandButton value="Search" action="#{newCarController.performSearch}"/>
+            <h:message for="searchReferenceNumber" id="searchErrorMessage"/>
         </h:form>
     </h:body>
 </html>

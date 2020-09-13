@@ -7,6 +7,11 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
+        <f:metadata>
+            <f:viewParam name="searchReferenceNumber" value="#{usedCarController.searchReferenceNumber}"/>
+            <f:event type="preRenderView" listener="#{usedCarController.loadSearchResults}"/>
+        </f:metadata>
+        
         <h:dataTable value="#{usedCarController.searchResults}" var="car" border="1">
             <h:column>
                 <f:facet name="header">
@@ -14,78 +19,120 @@
                 </f:facet>
                 <h:outputText value="#{car.referenceNumber}"/>
             </h:column>
-            
+
             <h:column>
                 <f:facet name="header">
                     <h:outputText value="Make"/>
                 </f:facet>
                 <h:outputText value="#{car.make}"/>
             </h:column>
-            
+
             <h:column>
                 <f:facet name="header">
                     <h:outputText value="Model"/>
                 </f:facet>
                 <h:outputText value="#{car.model}"/>
             </h:column>
-            
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Build Year"/>
-                </f:facet>
-                <h:outputText value="#{car.buildYear}"/>
-            </h:column>
-            
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Transmission"/>
-                </f:facet>
-                <h:outputText value="#{car.transmission}"/>
-            </h:column>
-            
+
             <h:column>
                 <f:facet name="header">
                     <h:outputText value="Drive Type"/>
                 </f:facet>
                 <h:outputText value="#{car.driveType}"/>
             </h:column>
-            
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Colour"/>
+                </f:facet>
+                <h:outputText value="#{car.colour}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Transmission"/>
+                </f:facet>
+                <h:outputText value="#{car.transmission}"/>
+            </h:column>
+
             <h:column>
                 <f:facet name="header">
                     <h:outputText value="Engine"/>
                 </f:facet>
                 <h:outputText value="#{car.engine}"/>
             </h:column>
-            
+
             <h:column>
                 <f:facet name="header">
                     <h:outputText value="Fuel Type"/>
                 </f:facet>
                 <h:outputText value="#{car.fuelType}"/>
             </h:column>
-            
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Doors"/>
+                </f:facet>
+                <h:outputText value="#{car.doors}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Seats"/>
+                </f:facet>
+                <h:outputText value="#{car.seats}"/>
+            </h:column>
+
             <h:column>
                 <f:facet name="header">
                     <h:outputText value="Odometer"/>
                 </f:facet>
                 <h:outputText value="#{car.odometer}"/>
             </h:column>
-            
+
             <h:column>
                 <f:facet name="header">
                     <h:outputText value="Registration Number"/>
                 </f:facet>
                 <h:outputText value="#{car.registrationNumber}"/>
             </h:column>
-            
+
             <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Registration Expiry"/>
+                </f:facet>
+                <h:outputText value="#{car.registrationExpiry}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Service History"/>
+                </f:facet>
+                <h:outputText value="#{car.serviceHistory}"/>
+            </h:column>
+            
+             <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Vehicle Identification Number"/>
+                </f:facet>
+                 <h:outputText value="#{car.vehicleIdentificationNumber}"/>
+            </h:column>
+            
+             <h:column>
                 <f:facet name="header">
                     <h:outputText value="History"/>
                 </f:facet>
                 <h:outputText value="#{car.history}"/>
             </h:column>
-            
-            
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Price"/>
+                </f:facet>
+                <h:outputText value="#{car.price}"/>
+            </h:column>
+
+
         </h:dataTable>
     </h:body>
 </html>

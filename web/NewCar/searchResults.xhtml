@@ -9,7 +9,6 @@
     <h:body>
         <f:metadata>
             <f:viewParam name="searchReferenceNumber" value="#{newCarController.searchReferenceNumber}"/>
-            <!--<f:viewAction action="#{newCarController.loadSearchResults}"/>-->
             <f:event type="preRenderView" listener="#{newCarController.loadSearchResults}"/>
         </f:metadata>
         <h1>Search Results</h1>
