@@ -6,11 +6,13 @@
         <title>Retrieve Customer Data</title>
     </h:head>
     <h:body>
-        <h1>Create a new car</h1>
+        <h1>Retrieve Customer </h1>
         <hr/>
-
         <h:form>
-            <h:outputText value="test"/>
+            <h:outputLabel value="Enter Name: "/>
+            <h:inputText id="searchReferenceNumber" value="#{customerController.search}"/>
+            <h:commandButton value="Search" action="#{customerController.performSearch}"/>
+            <h:message for="search" id="searchErrorMessage"/>
         </h:form>
     </h:body>
 </html>

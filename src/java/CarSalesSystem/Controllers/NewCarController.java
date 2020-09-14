@@ -1,22 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package CarSalesSystem.Controllers;
 
-import CarSalesSystem.EJB.NewCarEJB;
-import CarSalesSystem.Entities.NewCar;
-import java.util.ArrayList;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.inject.Named;
-import javax.enterprise.context.Dependent;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
+import java.util.ArrayList;
+import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
+import CarSalesSystem.Entities.NewCar;
+import CarSalesSystem.EJB.NewCarEJB;
 
 /**
  *
