@@ -1,11 +1,11 @@
 //File: CustomerOrder.java
 //Author: Matthew Gardiner - s0270923
-//Last modified: 16/8/2020
+//Co-Author: Jack Pashley - 12002954
+//Last modified: 16/9/2020
 //Purpose: Class representing a customer order entity
 package CarSalesSystem.Entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import javax.persistence.*;
 
 @Entity
@@ -31,29 +31,16 @@ public class CustomerOrder implements Serializable {
     private Car orderedCar;
 
     @Column(nullable = false)
-    private int salePrice;
-
-    @Column(nullable = false)
-    private String salesPerson;
-
-    @Column(nullable = false)
-    private boolean fulfilled;
-
-    @Column(nullable = false)
-    private LocalDate deliveryDate;
+    private int quantity;
 
     //Standard constructor
     public CustomerOrder() {
     }
 
     //Constructor containing all required fields
-    public CustomerOrder(Car orderedCar, String referenceNumber, int salePrice, String salesPerson, boolean fulfilled, LocalDate deliveryDate) {
+    public CustomerOrder(Car orderedCar, String referenceNumber) {
         this.orderedCar = orderedCar;
         this.referenceNumber = referenceNumber;
-        this.salePrice = salePrice;
-        this.salesPerson = salesPerson;
-        this.fulfilled = fulfilled;
-        this.deliveryDate = deliveryDate;
     }
 
     /**
@@ -85,62 +72,6 @@ public class CustomerOrder implements Serializable {
     }
 
     /**
-     * @return the salePrice
-     */
-    public int getSalePrice() {
-        return salePrice;
-    }
-
-    /**
-     * @param salePrice the salePrice to set
-     */
-    public void setSalePrice(int salePrice) {
-        this.salePrice = salePrice;
-    }
-
-    /**
-     * @return the salesPerson
-     */
-    public String getSalesPerson() {
-        return salesPerson;
-    }
-
-    /**
-     * @param salesPerson the salesPerson to set
-     */
-    public void setSalesPerson(String salesPerson) {
-        this.salesPerson = salesPerson;
-    }
-
-    /**
-     * @return the fulfilled
-     */
-    public boolean isFulfilled() {
-        return fulfilled;
-    }
-
-    /**
-     * @param fulfilled the fulfilled to set
-     */
-    public void setFulfilled(boolean fulfilled) {
-        this.fulfilled = fulfilled;
-    }
-
-    /**
-     * @return the deliveryDate
-     */
-    public LocalDate getDeliveryDate() {
-        return deliveryDate;
-    }
-
-    /**
-     * @param deliveryDate the deliveryDate to set
-     */
-    public void setDeliveryDate(LocalDate deliveryDate) {
-        this.deliveryDate = deliveryDate;
-    }
-    
-    /**
      * @return the referenceNumber
      */
     public String getReferenceNumber() {
@@ -152,5 +83,19 @@ public class CustomerOrder implements Serializable {
      */
     public void setReferenceNumber(String referenceNumber) {
         this.referenceNumber = referenceNumber;
+    }
+    
+    /**
+     * @return the quantity
+     */
+    public int getQuantity(){
+        return quantity;
+    }
+    
+    /**
+     * @param quantity the quantity to set
+     */
+    public void setQuantity(int quantity){
+        this.quantity = quantity;
     }
 }

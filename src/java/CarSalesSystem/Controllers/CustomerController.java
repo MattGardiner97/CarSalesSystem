@@ -38,7 +38,7 @@ public class CustomerController {
         return customer;
     }
 
-    public void setBook(CarSalesSystem.Entities.Customer customer) {
+    public void setCustomer(CarSalesSystem.Entities.Customer customer) {
         this.customer = customer;
     }
 
