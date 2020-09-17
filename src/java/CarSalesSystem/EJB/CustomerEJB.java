@@ -28,4 +28,8 @@ public class CustomerEJB {
         query.setParameter("name", search);
         return query.getResultList();
     }
+    
+    public Customer findByID(long ID){
+        return em.find(Customer.class, ID);
+    }
 }

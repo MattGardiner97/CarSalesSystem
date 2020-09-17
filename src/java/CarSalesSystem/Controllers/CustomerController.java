@@ -12,7 +12,7 @@ import CarSalesSystem.Entities.Customer;
 import CarSalesSystem.EJB.CustomerEJB;
 
 @ManagedBean
-@Named(value="customerController")
+@Named(value = "customerController")
 @RequestScoped
 public class CustomerController {
 
@@ -23,14 +23,35 @@ public class CustomerController {
     private List<Customer> customerList = new ArrayList<Customer>();
     private String search = "";
     private List<Customer> searchResults = new ArrayList<Customer>();
-    
-    public CustomerController(){}
+    private long detailsID = 0;
+
+    public CustomerController() {
+    }
 
     // Public Methods           
     public String createCustomer() {
         customer = customerEJB.createCustomer(customer);
         customerList = customerEJB.findCustomer();
         return "customerList.xhtml";
+    }
+
+    public void loadSearchResults() {
+        this.searchResults = customerEJB.searchByName(this.search);
+        if (this.searchResults.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(search, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No customer results found: ".concat(search), null));
+        }
+    }
+
+    public String performSearch() {
+        return "/Customer/searchResults.xhtml";
+    }
+
+    public void loadDetails() {
+        this.customer = customerEJB.findByID(detailsID);
+        if (this.customer == null) {
+            FacesContext.getCurrentInstance().addMessage(search, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No customer details found for ID: ".concat(Long.toString(detailsID)), null));
+        }
+
     }
 
     //Getters & Setters
@@ -50,32 +71,34 @@ public class CustomerController {
     public void setCustomerList(List<CarSalesSystem.Entities.Customer> customerList) {
         this.customerList = customerList;
     }
-    
-    public String getSearch(){
+
+    public String getSearch() {
         return search;
     }
-    
+
     public void setSearch(String search) {
         this.search = search;
     }
-    
+
     public List<Customer> getSearchResults() {
         return searchResults;
     }
-    
+
     public void setSearchResults(List<Customer> searchResults) {
         this.searchResults = searchResults;
     }
-    
-    public void loadSearchResults(){
-        this.searchResults = customerEJB.searchByName(this.search);
-        if(this.searchResults.isEmpty())
-        {
-            FacesContext.getCurrentInstance().addMessage(search, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No customer results found: ".concat(search),null));
-        }
+
+    /**
+     * @return the detailsID
+     */
+    public long getDetailsID() {
+        return detailsID;
     }
-    
-    public String performSearch(){
-        return "/Customer/searchResults.xhtml";
+
+    /**
+     * @param detailsID the detailsID to set
+     */
+    public void setDetailsID(long detailsID) {
+        this.detailsID = detailsID;
     }
 }

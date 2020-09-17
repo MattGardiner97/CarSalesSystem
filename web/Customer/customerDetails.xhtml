@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <f:metadata>
+            <f:viewParam name="customerID" value="#{customerController.detailsID}"/>
+            <f:event type="preRenderView" listener="#{customerController.loadDetails}"/>
+        </f:metadata> 
+
+        <h1>
+            Details
+        </h1>
+        <div>
+            ID: #{customerController.customer.id}<br/>
+            Name: #{customerController.customer.name}<br/>
+            Phone Number: #{customerController.customer.phoneNumber}<br/>
+            Address: #{customerController.customer.address}<br/>
+            Email Address: #{customerController.customer.emailAddress}<br/>
+            
+            <h1>
+                Car Orders (Implement count here)
+            </h1>
+        </div>
+    </h:body>
+</html>
+
