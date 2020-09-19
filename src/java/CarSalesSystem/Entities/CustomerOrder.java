@@ -1,6 +1,6 @@
 //File: CustomerOrder.java
-//Author: Matthew Gardiner - s0270923
-//Co-Author: Jack Pashley - 12002954
+//Author: Jack Pashley - 12002954
+//Co-Author: Matthew Gardiner - s0270923
 //Last modified: 16/9/2020
 //Purpose: Class representing a customer order entity
 package CarSalesSystem.Entities;
@@ -15,18 +15,16 @@ import javax.persistence.*;
     @NamedQuery(name = "orderFindByReferenceNumber", query = "SELECT o FROM CustomerOrder o WHERE o.referenceNumber = :referenceNumber") //Finds an order by reference number
 })
 public class CustomerOrder implements Serializable {
-    //Ideally, a 'Customer' field would have been included with this class containing a reference
-    //to the customer who made this order, however the requirement specification explicity stated
-    //that the relationship between a customer and customer order be unidirectional, therefore the
-    //Customer field is not included.
         
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false)
-    private String referenceNumber;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Customer customer;
 
+    @Column(nullable = false)
     @OneToOne(fetch = FetchType.LAZY)
     private Car orderedCar;
 
@@ -38,9 +36,10 @@ public class CustomerOrder implements Serializable {
     }
 
     //Constructor containing all required fields
-    public CustomerOrder(Car orderedCar, String referenceNumber) {
-        this.orderedCar = orderedCar;
-        this.referenceNumber = referenceNumber;
+    public CustomerOrder(Customer customer, Car orderedCar, int quantity) {
+      this.customer = customer;
+      this.orderedCar = orderedCar;
+      this.quantity = quantity;
     }
 
     /**
@@ -58,6 +57,20 @@ public class CustomerOrder implements Serializable {
     }
     
     /**
+     * @return the customer
+     */
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    /**
+     * @param customer the customer to set
+     */
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+    
+    /**
      * @return the orderedCar
      */
     public Car getOrderedCar() {
@@ -71,20 +84,6 @@ public class CustomerOrder implements Serializable {
         this.orderedCar = orderedCar;
     }
 
-    /**
-     * @return the referenceNumber
-     */
-    public String getReferenceNumber() {
-        return referenceNumber;
-    }
-
-    /**
-     * @param referenceNumber the referenceNumber to set
-     */
-    public void setReferenceNumber(String referenceNumber) {
-        this.referenceNumber = referenceNumber;
-    }
-    
     /**
      * @return the quantity
      */

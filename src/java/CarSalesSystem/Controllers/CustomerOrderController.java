@@ -52,7 +52,7 @@ public class CustomerOrderController {
         return customerOrderList;
     }
 
-    public void setCustomerList(List<CarSalesSystem.Entities.Customer> customerList) {
+    public void setCustomerOrderList(List<CarSalesSystem.Entities.Customer> customerList) {
         this.customerOrderList = customerOrderList;
     }
     

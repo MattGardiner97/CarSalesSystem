@@ -1,16 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Order Car List</title>
+    </h:head>
+    <h:body>
+        <h1>Order Car List</h1>
+        <hr/>
+        <h:dataTable value="#{customerOrderController.customerOrderList}" var="c" border="1">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Customer Name"/>
+                </f:facet>
+                <h:outputText value="#{c.CSTMRRDRCSTMRRDRSD}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Car"/>
+                </f:facet>
+                <h:outputText value="#{c.referenceNumber}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Quantity"/>
+                </f:facet>
+                <h:outputText value="#{c.quantity}"/>
+            </h:column>
+
+        </h:dataTable>
+    </h:body>
 </html>
