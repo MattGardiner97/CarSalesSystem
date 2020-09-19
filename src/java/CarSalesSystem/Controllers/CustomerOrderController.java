@@ -6,7 +6,7 @@
 package CarSalesSystem.Controllers;
 
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
+import javax.faces.bean.*;
 import javax.faces.bean.RequestScoped;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +14,11 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import CarSalesSystem.Entities.CustomerOrder;
+import CarSalesSystem.Entities.Customer;
 import CarSalesSystem.EJB.CustomerOrderEJB;
 
 @ManagedBean
-@Named(value="customerController")
+@Named(value="customerOrderController")
 @RequestScoped
 public class CustomerOrderController {
     
@@ -35,7 +36,7 @@ public class CustomerOrderController {
     public String createCustomerOrder() {
         customerOrder = customerOrderEJB.createCustomerOrder(customerOrder);
         customerOrderList = customerOrderEJB.findCustomerOrder();
-        return "customerOrderList.xhtml";
+        return "orderList.xhtml";
     }
 
     //Getters & Setters
@@ -71,15 +72,7 @@ public class CustomerOrderController {
     public void setSearchResults(List<CustomerOrder> searchResults) {
         this.searchResults = searchResults;
     }
-    
-    public void loadSearchResults(){
-        this.searchResults = customerOrderEJB.searchByReferenceNumber(this.search);
-        if(this.searchResults.isEmpty())
-        {
-            FacesContext.getCurrentInstance().addMessage(search, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No customer results found: ".concat(search),null));
-        }
-    }
-    
+        
     public String performSearch(){
         return "/CustomerOrder/searchResults.xhtml";
     }

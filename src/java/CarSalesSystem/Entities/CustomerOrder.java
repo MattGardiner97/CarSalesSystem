@@ -11,9 +11,9 @@ import javax.persistence.*;
 @Entity
 
 @NamedQueries({
-    @NamedQuery(name = "orderFindAll", query = "SELECT o FROM CustomerOrder o") //Finds all orders
-    ,
-//    @NamedQuery(name = "orderFindByReferenceNumber", query = "SELECT o FROM CustomerOrder o WHERE o.referenceNumber = :referenceNumber") //Finds an order by reference number
+    @NamedQuery(name = "orderFindAll", query = "SELECT o FROM CustomerOrder o"), //Finds all orders
+    @NamedQuery(name = "orderFindId", query = "SELECT o FROM CustomerOrder o WHERE o.id = :id"), //Finds an order by order number
+    //@NamedQuery(name = "orderFindCustomerId", query = "SELECT o FROM CustomerOrder o WHERE o.customer = :customer") //Finds an order by customer ID
 })
 
 public class CustomerOrder implements Serializable {

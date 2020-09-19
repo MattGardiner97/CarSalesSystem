@@ -11,16 +11,16 @@
         <h:form>
             <h:panelGrid columns="2" >
                 <h:outputLabel value="Customer: "/>
-                <h:inputText value="#{CustomerOrderController.customerOrder.customer}"/>
+                <h:inputText value="#{customerOrderController.customerOrder.customer}"/>
 
                 <h:outputLabel value="Car:"/>
-                <h:inputText value="#{CustomerOrderController.customerOrder.orderedCar}"/>
+                <h:inputText value="#{customerOrderController.customerOrder.orderedCar}"/>
 
                 <h:outputLabel value="Quantity: "/>
-                <h:inputText value="#{CustomerOrderController.customerOrder.quantity}"/>
+                <h:inputText value="#{customerOrderController.customerOrder.quantity}"/>
 
             </h:panelGrid>
-            <h:commandButton value="Create a Car Order" action="#{CustomerOrderController.createCustomerOrder}"/>
+            <h:commandButton value="Create a Car Order" action="#{customerOrderController.createCustomerOrder}"/>
         </h:form>
     </h:body>
 </html>

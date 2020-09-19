@@ -30,10 +30,4 @@ public class CustomerOrderEJB {
         return query.getResultList();
     }
 
-    //Search for the Order by reference number
-    public List<CustomerOrder> searchByReferenceNumber(String search){
-        TypedQuery<CustomerOrder> query = em.createNamedQuery("orderFindByReferenceNumber", CustomerOrder.class);
-        query.setParameter("referenceNumber", search);
-        return query.getResultList();
-    }
 }
