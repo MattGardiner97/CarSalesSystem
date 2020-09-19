@@ -9,23 +9,25 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
+
 @NamedQueries({
     @NamedQuery(name = "orderFindAll", query = "SELECT o FROM CustomerOrder o") //Finds all orders
     ,
-    @NamedQuery(name = "orderFindByReferenceNumber", query = "SELECT o FROM CustomerOrder o WHERE o.referenceNumber = :referenceNumber") //Finds an order by reference number
+//    @NamedQuery(name = "orderFindByReferenceNumber", query = "SELECT o FROM CustomerOrder o WHERE o.referenceNumber = :referenceNumber") //Finds an order by reference number
 })
+
 public class CustomerOrder implements Serializable {
         
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn(name="ID", referencedColumnName="ID")
     private Customer customer;
 
-    @Column(nullable = false)
     @OneToOne(fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn(name="ID", referencedColumnName="ID")
     private Car orderedCar;
 
     @Column(nullable = false)
