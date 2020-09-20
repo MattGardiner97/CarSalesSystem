@@ -49,7 +49,7 @@ public class CarConverter implements Converter{
 
         try {
            // return CustomerController.find(Long.valueOf(submittedValue));
-           TypedQuery<Car> query = em.createNamedQuery("CustomerFindById", Car.class);
+           TypedQuery<Car> query = em.createNamedQuery("carFindById", Car.class);
            query.setParameter("id", submittedValue);
            return query.getResultList();
            

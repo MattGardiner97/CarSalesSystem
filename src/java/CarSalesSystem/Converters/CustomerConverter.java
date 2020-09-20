@@ -49,7 +49,7 @@ public class CustomerConverter implements Converter{
 
         try {
            // return CustomerController.find(Long.valueOf(submittedValue));
-           TypedQuery<Customer> query = em.createNamedQuery("CustomerFindById", Customer.class);
+           TypedQuery<Customer> query = em.createNamedQuery("customerFindById", Customer.class);
            query.setParameter("id", submittedValue);
            return query.getResultList();
            

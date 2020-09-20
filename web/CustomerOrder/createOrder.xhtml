@@ -25,7 +25,8 @@
                 <h:selectOneMenu id="car_List" 
                                 value="#{carController.carList}"
                                 converter="#{carConverter}"> 
-                    <f:selectItems value="#{carController.carList}" var="caList"
+                    <f:selectItems value="#{carController.carList}"
+                                   var="caList"
                                    itemValue="#{caList.id}"
                                    itemLabel="#{caList.make}, #{caList.model}"/>
                 </h:selectOneMenu>

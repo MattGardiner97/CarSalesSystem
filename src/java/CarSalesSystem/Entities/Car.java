@@ -13,7 +13,8 @@ import javax.inject.Named;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "carFindAll", query = "SELECT c FROM Car c"), //Retrieves all cars from the database
-    @NamedQuery(name = "carFindByReferenceNumber", query = "SELECT c FROM Car c WHERE c.referenceNumber = :referenceNumber") //Find a car by reference number
+    @NamedQuery(name = "carFindByReferenceNumber", query = "SELECT c FROM Car c WHERE c.referenceNumber = :referenceNumber"), //Find a car by reference number
+    @NamedQuery(name = "carFindById", query = "SELECT c FROM Car c WHERE c.id = :id")
 })
 @Inheritance(strategy = InheritanceType.JOINED)
 @Named(value = "Car")
