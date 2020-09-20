@@ -40,13 +40,16 @@ public class CustomerConverter implements Converter{
         if (modelValue instanceof Customer) {
             return String.valueOf(((Customer) modelValue).getId());
         } else {
-            throw new ConverterException(new FacesMessage(modelValue + " is not a valid Warehouse"));
+            throw new ConverterException(new FacesMessage(modelValue.getClass() + " is not a valid Warehouse"));
         }
     }
     
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String submittedValue) {
         System.out.println("HERE2!!!");
+        System.out.println("Submitted value= " + submittedValue);
+        System.out.println("Submitted value class= " + submittedValue.getClass());
+        long id;// = Long.parseLong(submittedValue);
         
         if (submittedValue == null || submittedValue.isEmpty()) {
             return null;
@@ -54,8 +57,10 @@ public class CustomerConverter implements Converter{
 
         try {
            // return CustomerController.find(Long.valueOf(submittedValue));
+          // System.out.println("id in try= " + id);
+          // System.out.println(id);
            TypedQuery<Customer> query = em.createNamedQuery("customerFindById", Customer.class);
-           query.setParameter("id", submittedValue);
+           query.setParameter("id", Long.parseLong(submittedValue));
            return query.getResultList();
            
         } catch (NumberFormatException e) {

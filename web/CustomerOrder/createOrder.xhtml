@@ -17,7 +17,7 @@
                                 converter="customerConverter">
                     <f:selectItems value="#{customerController.customerList}"
                                    var="cList"
-                                   itemValue="#{cList.id}"
+                                   itemValue="#{cList}"
                                    itemLabel="#{cList.name}"/>
                 </h:selectOneMenu>
 
@@ -27,7 +27,7 @@
                                 converter="#{carConverter}"> 
                     <f:selectItems value="#{carController.carList}"
                                    var="caList"
-                                   itemValue="#{caList.id}"
+                                   itemValue="#{caList}"
                                    itemLabel="#{caList.make}, #{caList.model}"/>
                 </h:selectOneMenu>
                 
@@ -35,7 +35,7 @@
                 <h:inputText value="#{customerOrderController.customerOrder.quantity}"/>
 
             </h:panelGrid>
-            <h:commandButton value="Create a Car Order" action="#{customerOrderController.createCustomerOrder}"/>
+            <h:commandButton value="Create a Car Order" action="#{customerOrderController.createCustomerOrder}" id="submit"/>
         </h:form>
     </h:body>
 </html>
