@@ -7,30 +7,31 @@
         <title>Create a new car order</title>
     </h:head>
     <h:body>
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{customerOrderController.createOrder_PageLoad}"/>
+        </f:metadata>
+        
         <h1>Create a new car order</h1>
         <hr/>
         <h:form>
             <h:panelGrid columns="2" >
                 <h:outputLabel value="Customer:"/>
-                <h:selectOneMenu id="customer_List"
-                                value="#{customerController.customerList}"
-                                converter="customerConverter">
-                    <f:selectItems value="#{customerController.customerList}"
-                                   var="cList"
-                                   itemValue="#{cList.id}"
-                                   itemLabel="#{cList.name}"/>
+                <h:selectOneMenu id="customer_List" value="#{customerOrderController.customerOrder.customer}" converter="customerConverter">
+                    <f:selectItems value="#{customerOrderController.customerList}"
+                                   var="customer"
+                                   itemValue="#{customer}"
+                                   itemLabel="#{customer.name}"/>
                 </h:selectOneMenu>
 
                 <h:outputLabel value="Car:"/>
                 <h:selectOneMenu id="car_List" 
-                                value="#{carController.carList}"
-                                converter="#{carConverter}"> 
-                    <f:selectItems value="#{carController.carList}"
-                                   var="caList"
-                                   itemValue="#{caList.id}"
-                                   itemLabel="#{caList.make}, #{caList.model}"/>
+                                 value="#{customerOrderController.customerOrder.orderedCar}" converter="carConverter">
+                    <f:selectItems value="#{customerOrderController.carList}"
+                                   var="car"
+                                   itemValue="#{car}"
+                                   itemLabel="#{car.toString()}"/>
                 </h:selectOneMenu>
-                
+
                 <h:outputLabel value="Quantity: "/>
                 <h:inputText value="#{customerOrderController.customerOrder.quantity}"/>
 
