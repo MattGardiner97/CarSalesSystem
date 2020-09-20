@@ -18,7 +18,7 @@ public class CustomerEJB {
         return c;
     }
 
-    public List<Customer> findCustomer() {
+    public List<Customer> getCustomerList() {
         TypedQuery<Customer> query = em.createNamedQuery("customerFindAll", Customer.class);
         return query.getResultList();
     }
@@ -28,7 +28,7 @@ public class CustomerEJB {
         query.setParameter("name", search);
         return query.getResultList();
     }
-    
+      
     public Customer findByID(long ID){
         return em.find(Customer.class, ID);
     }
