@@ -5,25 +5,34 @@
 
 package CarSalesSystem.Controllers;
 
+import CarSalesSystem.EJB.*;
+import CarSalesSystem.Entities.*;
+
 import javax.ejb.EJB;
 import javax.faces.bean.*;
-import javax.faces.bean.RequestScoped;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
-import CarSalesSystem.Entities.CustomerOrder;
-import CarSalesSystem.EJB.CustomerOrderEJB;
+
 
 @ManagedBean
 @Named(value="customerOrderController")
-@RequestScoped
+@ViewScoped
 public class CustomerOrderController {
     
     // Attributes             
     @EJB
     private CustomerOrderEJB customerOrderEJB;
+    @EJB
+    private CustomerEJB customerEJB;
+    @EJB
+    private CarEJB carEJB;
+    
     private CustomerOrder customerOrder = new CustomerOrder();
     private String search = "";
+    private List<Customer> customerList;
+    private List<Car> carList;
     private List<CustomerOrder> searchResults = new ArrayList<CustomerOrder>();
     private List<CustomerOrder> customerOrderList = new ArrayList<CustomerOrder>();
     
@@ -33,7 +42,12 @@ public class CustomerOrderController {
     public String createCustomerOrder() {
         customerOrder = customerOrderEJB.createCustomerOrder(customerOrder);
         customerOrderList = customerOrderEJB.findCustomerOrder();
-        return "orderList.xhtml";
+        return "/CustomerOrder/orderList.xhtml";
+    }
+    
+    public void createOrder_PageLoad(){
+        this.customerList = customerEJB.getCustomerList();
+        this.carList = carEJB.getCarList();
     }
 
     //Getters & Setters
@@ -72,6 +86,34 @@ public class CustomerOrderController {
         
     public String performSearch(){
         return "/CustomerOrder/searchResults.xhtml";
+    }
+
+    /**
+     * @return the customerList
+     */
+    public List<Customer> getCustomerList() {
+        return customerList;
+    }
+
+    /**
+     * @param customerList the customerList to set
+     */
+    public void setCustomerList(List<Customer> customerList) {
+        this.customerList = customerList;
+    }
+
+    /**
+     * @return the carList
+     */
+    public List<Car> getCarList() {
+        return carList;
+    }
+
+    /**
+     * @param carList the carList to set
+     */
+    public void setCarList(List<Car> carList) {
+        this.carList = carList;
     }
     
 }
