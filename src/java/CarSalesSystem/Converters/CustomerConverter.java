@@ -7,6 +7,7 @@
 package CarSalesSystem.Converters;
 
 import CarSalesSystem.Entities.Customer;
+import CarSalesSystem.Entities.CustomerOrder;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -22,7 +23,7 @@ import javax.persistence.TypedQuery;
  *
  * @author jackp
  */
-@FacesConverter(forClass = Customer.class)
+@FacesConverter(forClass = CustomerOrder.class)
 @Named(value = "customerConverter")
 public class CustomerConverter implements Converter{
     @PersistenceContext(unitName = "CarSalesSystemPU")
@@ -30,6 +31,9 @@ public class CustomerConverter implements Converter{
     
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object modelValue) {
+        
+        System.out.println("HERE!");
+        
         if (modelValue == null) {
             return "";
         }
@@ -43,6 +47,8 @@ public class CustomerConverter implements Converter{
     
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String submittedValue) {
+        System.out.println("HERE2!!!");
+        
         if (submittedValue == null || submittedValue.isEmpty()) {
             return null;
         }

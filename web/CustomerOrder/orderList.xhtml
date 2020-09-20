@@ -14,14 +14,14 @@
                 <f:facet name="header">
                     <h:outputText value="Customer Name"/>
                 </f:facet>
-                <h:outputText value="#{c.CSTMRRDRCSTMRRDRSD}"/>
+                <h:outputText value="#{c.customer.name}"/>
             </h:column>
 
             <h:column>
                 <f:facet name="header">
                     <h:outputText value="Car"/>
                 </f:facet>
-                <h:outputText value="#{c.referenceNumber}"/>
+                <h:outputText value="#{c.orderedCar.make}"/>
             </h:column>
 
             <h:column>
