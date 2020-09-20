@@ -33,7 +33,7 @@ public class CustomerController {
     // Public Methods           
     public String createCustomer() {
         customer = customerEJB.createCustomer(customer);
-        customerList = customerEJB.findCustomer();
+        customerList = customerEJB.getCustomerList();
         return "customerList.xhtml";
     }
 
@@ -64,7 +64,7 @@ public class CustomerController {
     }
 
     public List<CarSalesSystem.Entities.Customer> getCustomerList() {
-        customerList = customerEJB.findCustomer();
+        customerList = customerEJB.getCustomerList();
         return customerList;
     }
 
