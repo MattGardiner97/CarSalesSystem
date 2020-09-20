@@ -7,6 +7,7 @@ package CarSalesSystem.Entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.*;
 
 @Entity
@@ -40,24 +41,6 @@ public class Customer implements Serializable {
     //Standard constructor
     public Customer() {
         customerOrders = new ArrayList<CustomerOrder>();
-    }
-
-    //Constructor containing only the required fields
-    public Customer(String name, String address) {
-        this();
-
-        this.name = name;
-        this.address = address;
-    }
-
-    //Constructor for required and non-required fields
-    public Customer(String name, String address, String phoneNumber, String emailAddress) {
-        this();
-
-        this.name = name;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.emailAddress = emailAddress;
     }
 
     /**
@@ -141,11 +124,31 @@ public class Customer implements Serializable {
         this.customerOrders = customerOrders;
     }
 
-    /*
     @Override
-    public String toString() {
-        return name;
+    public int hashCode() {
+        int hash = 7;
+        hash = 43 * hash + Objects.hashCode(this.id);
+        return hash;
     }
-    */
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Customer other = (Customer) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+    
+ 
 
 }

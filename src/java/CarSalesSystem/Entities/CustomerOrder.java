@@ -23,11 +23,9 @@ public class CustomerOrder implements Serializable {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn(name="ID", referencedColumnName="ID")
     private Customer customer;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn(name="ID", referencedColumnName="ID")
     private Car orderedCar;
 
     @Column(nullable = false)

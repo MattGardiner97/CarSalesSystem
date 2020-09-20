@@ -5,6 +5,7 @@
 package CarSalesSystem.Entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.*;
 
 import javax.enterprise.context.SessionScoped;
@@ -14,7 +15,7 @@ import javax.inject.Named;
 @NamedQueries({
     @NamedQuery(name = "carFindAll", query = "SELECT c FROM Car c"), //Retrieves all cars from the database
     @NamedQuery(name = "carFindByReferenceNumber", query = "SELECT c FROM Car c WHERE c.referenceNumber = :referenceNumber"), //Find a car by reference number
-    @NamedQuery(name = "carFindById", query = "SELECT c FROM Car c WHERE c.id = :id")
+    @NamedQuery(name = "carFindByID", query = "SELECT c FROM Car c WHERE c.id = :id")
 })
 @Inheritance(strategy = InheritanceType.JOINED)
 @Named(value = "Car")
@@ -229,4 +230,36 @@ public class Car implements Serializable {
     public void setPrice(int price) {
         this.price = price;
     }
+    
+     @Override	
+    public String toString(){	
+        return String.format("%s %s", this.make,this.model);	
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Car other = (Car) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }
