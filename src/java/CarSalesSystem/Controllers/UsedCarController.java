@@ -5,7 +5,7 @@
  */
 package CarSalesSystem.Controllers;
 
-import CarSalesSystem.EJB.UsedCarEJB;
+import CarSalesSystem.EJB.CarEJB;
 import CarSalesSystem.Entities.UsedCar;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 public class UsedCarController {
     @EJB
-    private UsedCarEJB carEJB;
+    private CarEJB carEJB;
     private UsedCar car = new UsedCar();
     private List<UsedCar> carList = new ArrayList<UsedCar>();
     private String searchReferenceNumber = "";
@@ -38,16 +38,16 @@ public class UsedCarController {
     }
     
     public String createCar(){
-         carEJB.createUsedCar(car);
+         carEJB.createCar(car);
         FacesContext.getCurrentInstance().addMessage(searchReferenceNumber, new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully created used car: ".concat(car.toString()),null));
         return "/UsedCar/listUsedCars.xhtml";
     }
     
     public void loadCarList(){
-        this.carList = carEJB.getCarList();
+        this.carList = carEJB.getUsedCarList();
     }
     public void loadSearchResults(){
-        this.searchResults = carEJB.searchByReferenceNumber(this.searchReferenceNumber);
+        this.searchResults = carEJB.searchUsedCarByReferenceNumber(this.searchReferenceNumber);
         if(this.searchResults.isEmpty())
         {
             FacesContext.getCurrentInstance().addMessage(searchReferenceNumber, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No car found for reference number: ".concat(searchReferenceNumber),null));
@@ -72,8 +72,6 @@ public class UsedCarController {
     public void setCarList(List<UsedCar> carList){
         this.carList = carList;
     }
-    
-    
 
     /**
      * @return the searchReferenceNumber

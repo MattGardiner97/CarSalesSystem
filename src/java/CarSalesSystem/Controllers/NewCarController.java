@@ -1,5 +1,6 @@
 package CarSalesSystem.Controllers;
 
+import CarSalesSystem.EJB.CarEJB;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -9,7 +10,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import CarSalesSystem.Entities.NewCar;
-import CarSalesSystem.EJB.NewCarEJB;
 
 /**
  *
@@ -20,7 +20,7 @@ import CarSalesSystem.EJB.NewCarEJB;
 @RequestScoped
 public class NewCarController {
     @EJB
-    private NewCarEJB carEJB;
+    private CarEJB carEJB;
     private NewCar car = new NewCar();
     private List<NewCar> carList = new ArrayList<NewCar>();
     private String searchReferenceNumber = "";
@@ -32,16 +32,17 @@ public class NewCarController {
     }
     
     public String createCar(){
-        carEJB.createNewCar(car);
+        carEJB.createCar(car);
         FacesContext.getCurrentInstance().addMessage(searchReferenceNumber, new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully created new car: ".concat(car.toString()),null));
         return "/NewCar/listNewCars.xhtml";
     }
     
     public void loadCarList(){
-        this.carList = carEJB.getCarList();
+        this.carList = carEJB.getNewCarList();
     }
+    
     public void loadSearchResults(){
-        this.searchResults = carEJB.searchByReferenceNumber(this.searchReferenceNumber);
+        this.searchResults = carEJB.searchNewCarByReferenceNumber(this.searchReferenceNumber);
         if(this.searchResults.isEmpty())
         {
             FacesContext.getCurrentInstance().addMessage(searchReferenceNumber, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No car found for reference number: ".concat(searchReferenceNumber),null));
@@ -51,19 +52,6 @@ public class NewCarController {
     public String performSearch(){
         return "/NewCar/searchResults.xhtml";
     }
-    
-//    public String performSearch(){
-//        return performSearch(this.searchReferenceNumber);
-//    }
-//    public String performSearch(String referenceNumber){
-//        this.searchResults = carEJB.searchByReferenceNumber(referenceNumber);
-//        if(this.searchResults.isEmpty())
-//        {
-//            FacesContext.getCurrentInstance().addMessage(searchReferenceNumber, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No car found for reference number: ".concat(searchReferenceNumber),null));
-//            return null;
-//        }
-//        return "/NewCar/searchResults.xhtml";
-//    }
     
     //Getters & Setters
     public NewCar getCar(){
