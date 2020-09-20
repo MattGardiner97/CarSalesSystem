@@ -7,17 +7,14 @@
 package CarSalesSystem.Converters;
 
 import CarSalesSystem.Entities.Customer;
-import CarSalesSystem.Entities.CustomerOrder;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 
 /**
  *
@@ -25,6 +22,7 @@ import javax.persistence.TypedQuery;
  */
 @FacesConverter(value = "customerConverter")
 public class CustomerConverter implements Converter{
+    
     @PersistenceContext(unitName = "CarSalesSystemPU")
     private EntityManager em;
     
@@ -40,23 +38,22 @@ public class CustomerConverter implements Converter{
         if (modelValue instanceof Customer) {
             return String.valueOf(((Customer) modelValue).getId());
         } else {
-            throw new ConverterException(new FacesMessage(modelValue + " is not a valid Warehouse"));
+            throw new ConverterException(new FacesMessage(modelValue + " is not a valid ID " + modelValue.getClass().toString()));
         }
     }
     
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String submittedValue) {
-        System.out.println("HERE2!!!");
+        System.out.println(submittedValue);
         
         if (submittedValue == null || submittedValue.isEmpty()) {
             return null;
         }
 
         try {
-           // return CustomerController.find(Long.valueOf(submittedValue));
-           TypedQuery<Customer> query = em.createNamedQuery("customerFindById", Customer.class);
-           query.setParameter("id", submittedValue);
-           return query.getResultList();
+            Customer result = new Customer();
+            result.setId(Long.valueOf(submittedValue));
+            return result;
            
         } catch (NumberFormatException e) {
             throw new ConverterException(new FacesMessage(submittedValue + " is not a valid Warehouse ID"), e);
