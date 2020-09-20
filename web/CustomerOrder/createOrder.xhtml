@@ -12,13 +12,22 @@
         <h:form>
             <h:panelGrid columns="2" >
                 <h:outputLabel value="Customer:"/>
-                <h:selectOneMenu value="#{customerController.customerList}">
-                    <f:selectItems value="#{customerController.customerList}" var="id"/>
+                <h:selectOneMenu id="customer_List"
+                                value="#{customerController.customerList}"
+                                converter="#{customerConverter}">
+                    <f:selectItems value="#{customerController.customerList}"
+                                   var="cList"
+                                   itemValue="#{cList.id}"
+                                   itemLabel="#{cList.name}"/>
                 </h:selectOneMenu>
 
                 <h:outputLabel value="Car:"/>
-                <h:selectOneMenu value="#{carController.carList}">
-                    <f:selectItems value="#{carController.carList}" var="id"/>
+                <h:selectOneMenu id="car_List" 
+                                value="#{carController.carList}"
+                                converter="#{carConverter}"> 
+                    <f:selectItems value="#{carController.carList}" var="caList"
+                                   itemValue="#{caList.id}"
+                                   itemLabel="#{caList.make}, #{caList.model}"/>
                 </h:selectOneMenu>
                 
                 <h:outputLabel value="Quantity: "/>

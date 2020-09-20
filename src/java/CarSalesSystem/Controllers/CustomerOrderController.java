@@ -10,11 +10,8 @@ import javax.faces.bean.*;
 import javax.faces.bean.RequestScoped;
 import java.util.ArrayList;
 import java.util.List;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import CarSalesSystem.Entities.CustomerOrder;
-import CarSalesSystem.Entities.Customer;
 import CarSalesSystem.EJB.CustomerOrderEJB;
 
 @ManagedBean

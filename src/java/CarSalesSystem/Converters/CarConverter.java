@@ -6,7 +6,7 @@
 
 package CarSalesSystem.Converters;
 
-import CarSalesSystem.Entities.Customer;
+import CarSalesSystem.Entities.Car;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -22,9 +22,9 @@ import javax.persistence.TypedQuery;
  *
  * @author jackp
  */
-@FacesConverter(forClass = Customer.class)
-@Named(value = "customerConverter")
-public class CustomerConverter implements Converter{
+@FacesConverter(forClass = Car.class)
+@Named(value = "carConverter")
+public class CarConverter implements Converter{
     @PersistenceContext(unitName = "CarSalesSystemPU")
     private EntityManager em;
     
@@ -34,8 +34,8 @@ public class CustomerConverter implements Converter{
             return "";
         }
 
-        if (modelValue instanceof Customer) {
-            return String.valueOf(((Customer) modelValue).getId());
+        if (modelValue instanceof Car) {
+            return String.valueOf(((Car) modelValue).getId());
         } else {
             throw new ConverterException(new FacesMessage(modelValue + " is not a valid Warehouse"));
         }
@@ -49,7 +49,7 @@ public class CustomerConverter implements Converter{
 
         try {
            // return CustomerController.find(Long.valueOf(submittedValue));
-           TypedQuery<Customer> query = em.createNamedQuery("CustomerFindById", Customer.class);
+           TypedQuery<Car> query = em.createNamedQuery("CustomerFindById", Car.class);
            query.setParameter("id", submittedValue);
            return query.getResultList();
            

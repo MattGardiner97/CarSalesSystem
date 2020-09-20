@@ -228,11 +228,4 @@ public class Car implements Serializable {
     public void setPrice(int price) {
         this.price = price;
     }
-    
-    @Override
-    public String toString(){
-        return String.format("%s %s", this.make,this.model);
-    }
-
-    
 }
