@@ -14,6 +14,8 @@ import javax.persistence.*;
     @NamedQuery(name = "customerFindAll", query = "SELECT c FROM Customer c") //Finds all customers
     ,
     @NamedQuery(name = "customerFindByName", query = "SELECT c FROM Customer c WHERE lower(c.name) = lower(:name)") //Finds a customer by name
+    ,
+    @NamedQuery(name = "customerFindById", query = "SELECT c FROM Customer c WHERE c.id = :id")
 })
 public class Customer implements Serializable {
 
@@ -138,5 +140,12 @@ public class Customer implements Serializable {
     public void setCustomerOrders(List<CustomerOrder> customerOrders) {
         this.customerOrders = customerOrders;
     }
+
+    /*
+    @Override
+    public String toString() {
+        return name;
+    }
+    */
 
 }

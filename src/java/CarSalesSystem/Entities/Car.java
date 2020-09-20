@@ -18,7 +18,7 @@ import javax.inject.Named;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Named(value = "Car")
 @SessionScoped
-public abstract class Car implements Serializable {
+public class Car implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

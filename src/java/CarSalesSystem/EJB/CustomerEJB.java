@@ -9,7 +9,7 @@ import CarSalesSystem.Entities.Customer;
 
 @Stateless
 public class CustomerEJB {
-
+   
     @PersistenceContext(unitName = "CarSalesSystemPU")
     private EntityManager em;
 

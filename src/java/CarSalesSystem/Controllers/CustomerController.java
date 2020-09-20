@@ -10,6 +10,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import CarSalesSystem.Entities.Customer;
 import CarSalesSystem.EJB.CustomerEJB;
+import javax.faces.component.UIComponent;
+import javax.faces.convert.ConverterException;
 
 @ManagedBean
 @Named(value = "customerController")
@@ -51,11 +53,9 @@ public class CustomerController {
         if (this.customer == null) {
             FacesContext.getCurrentInstance().addMessage(search, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No customer details found for ID: ".concat(Long.toString(detailsID)), null));
         }
-
     }
 
-    //Getters & Setters
-    public CarSalesSystem.Entities.Customer getCustomer() {
+    public Customer getCustomer() {
         return customer;
     }
 
