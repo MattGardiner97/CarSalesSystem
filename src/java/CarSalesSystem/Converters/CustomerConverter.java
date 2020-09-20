@@ -23,8 +23,7 @@ import javax.persistence.TypedQuery;
  *
  * @author jackp
  */
-@FacesConverter(forClass = CustomerOrder.class)
-@Named(value = "customerConverter")
+@FacesConverter(value = "customerConverter")
 public class CustomerConverter implements Converter{
     @PersistenceContext(unitName = "CarSalesSystemPU")
     private EntityManager em;

@@ -14,7 +14,7 @@
                 <h:outputLabel value="Customer:"/>
                 <h:selectOneMenu id="customer_List"
                                 value="#{customerController.customerList}"
-                                converter="#{customerConverter}">
+                                converter="customerConverter">
                     <f:selectItems value="#{customerController.customerList}"
                                    var="cList"
                                    itemValue="#{cList.id}"
