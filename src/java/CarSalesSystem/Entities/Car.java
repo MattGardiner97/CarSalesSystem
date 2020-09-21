@@ -250,9 +250,7 @@ public class Car implements Serializable {
         }
         if (obj == null) {
             return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
+        
         }
         final Car other = (Car) obj;
         if (!Objects.equals(this.id, other.id)) {
