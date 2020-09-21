@@ -1,70 +1,76 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        <h1>Create a used car</h1>
-        <hr/>
-        
-        <h:form>
-            <h:panelGrid columns="2">
-                <h:outputLabel value="Reference Number: "/>
-                <h:inputText value="#{usedCarController.car.referenceNumber}"/>
-                
-                <h:outputLabel value="Make: "/>
-                <h:inputText value="#{usedCarController.car.make}"/>
-                
-                <h:outputLabel value="Model: "/>
-                <h:inputText value="#{usedCarController.car.model}"/>
-                
-                <h:outputLabel value="Drive Type: "/>
-                <h:inputText value="#{usedCarController.car.driveType}"/>
-                
-                <h:outputLabel value="Colour: "/>
-                <h:inputText value="#{usedCarController.car.colour}"/>
-                
-                <h:outputLabel value="Transmission: "/>
-                <h:inputText value="#{usedCarController.car.transmission}"/>
-                
-                <h:outputLabel value="Engine: "/>
-                <h:inputText value="#{usedCarController.car.engine}"/>
-                
-                <h:outputLabel value="Fuel Type: "/>
-                <h:inputText value="#{usedCarController.car.fuelType}"/>
-                
-                <h:outputLabel value="Doors: "/>
-                <h:inputText value="#{usedCarController.car.doors}"/>
-                
-                <h:outputLabel value="Seats: "/>
-                <h:inputText value="#{usedCarController.car.seats}"/>
-                
-                <h:outputLabel value="Price: "/>
-                <h:inputText value="#{usedCarController.car.price}"/>
-                
-                <h:outputLabel value="Odometer: "/>
-                <h:inputText value="#{usedCarController.car.odometer}"/>
-                
-                <h:outputLabel value="Registration Number: "/>
-                <h:inputText value="#{usedCarController.car.registrationNumber}"/>
-                
-                <h:outputLabel value="Registration Expiry: "/>
-                <h:inputText value="#{usedCarController.car.registrationExpiry}"/>
-                
-                <h:outputLabel value="Service History: "/>
-                <h:inputText value="#{usedCarController.car.serviceHistory}"/>
-                
-                 <h:outputLabel value="Vehicle Identification Number: "/>
-                 <h:inputText value="#{usedCarController.car.vehicleIdentificationNumber}"/>
-                
-                 <h:outputLabel value="History: "/>
-                 <h:inputText value="#{usedCarController.car.history}"/>
-            </h:panelGrid>
-            
-            <h:commandButton value="Save" action="#{usedCarController.createCar}"/>
-        </h:form>
-    </h:body>
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition template="/layout.xhtml">
+        <ui:define name="title">Create a used car</ui:define>
+        <ui:define name="header">Create a used car</ui:define>
+
+        <ui:define name="content">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Reference Number: "/>
+                    <h:inputText value="#{usedCarController.car.referenceNumber}"/>
+
+                    <h:outputLabel value="Make: "/>
+                    <h:inputText value="#{usedCarController.car.make}"/>
+
+                    <h:outputLabel value="Model: "/>
+                    <h:inputText value="#{usedCarController.car.model}"/>
+
+                    <h:outputLabel value="Drive Type: "/>
+                    <h:inputText value="#{usedCarController.car.driveType}"/>
+
+                    <h:outputLabel value="Colour: "/>
+                    <h:inputText value="#{usedCarController.car.colour}"/>
+
+                    <h:outputLabel value="Transmission: "/>
+                    <h:inputText value="#{usedCarController.car.transmission}"/>
+
+                    <h:outputLabel value="Engine: "/>
+                    <h:inputText value="#{usedCarController.car.engine}"/>
+
+                    <h:outputLabel value="Fuel Type: "/>
+                    <h:inputText value="#{usedCarController.car.fuelType}"/>
+
+                    <h:outputLabel value="Doors: "/>
+                    <h:inputText value="#{usedCarController.car.doors}"/>
+
+                    <h:outputLabel value="Seats: "/>
+                    <h:inputText value="#{usedCarController.car.seats}"/>
+
+                    <h:outputLabel value="Price: "/>
+                    <h:inputText value="#{usedCarController.car.price}"/>
+
+                    <h:outputLabel value="Odometer: "/>
+                    <h:inputText value="#{usedCarController.car.odometer}"/>
+
+                    <h:outputLabel value="Registration Number: "/>
+                    <h:inputText value="#{usedCarController.car.registrationNumber}"/>
+
+                    <h:outputLabel value="Registration Expiry: "/>
+                    <h:inputText value="#{usedCarController.car.registrationExpiry}"/>
+
+                    <h:outputLabel value="Service History: "/>
+                    <h:inputText value="#{usedCarController.car.serviceHistory}"/>
+
+                    <h:outputLabel value="Vehicle Identification Number: "/>
+                    <h:inputText value="#{usedCarController.car.vehicleIdentificationNumber}"/>
+
+                    <h:outputLabel value="History: "/>
+                    <h:inputText value="#{usedCarController.car.history}"/>
+                </h:panelGrid>
+
+                <h:commandButton value="Save" action="#{usedCarController.createCar}"/>
+            </h:form>
+        </ui:define>
+
+        <ui:define name="footer">
+            <h:link value="The stock of used cars" outcome="/UsedCar/listUsedCars.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
 </html>
 
