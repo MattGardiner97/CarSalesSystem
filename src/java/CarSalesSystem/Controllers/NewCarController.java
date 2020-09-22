@@ -19,52 +19,56 @@ import CarSalesSystem.Entities.NewCar;
 @Named(value = "newCarController")
 @RequestScoped
 public class NewCarController {
+
     @EJB
     private CarEJB carEJB;
     private NewCar car = new NewCar();
     private List<NewCar> carList = new ArrayList<NewCar>();
     private String searchReferenceNumber = "";
     private List<NewCar> searchResults = new ArrayList<NewCar>();
-    
-    
+
     public NewCarController() {
-        
+
     }
-    
-    public String createCar(){
+
+    public String createCar() {
         carEJB.createCar(car);
-        FacesContext.getCurrentInstance().addMessage(searchReferenceNumber, new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully created new car: ".concat(car.toString()),null));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully created new car: ".concat(car.toString()), null));
         return "/NewCar/listNewCars.xhtml";
     }
-    
-    public void loadCarList(){
+
+    public void loadCarList() {
         this.carList = carEJB.getNewCarList();
-    }
-    
-    public void loadSearchResults(){
-        this.searchResults = carEJB.searchNewCarByReferenceNumber(this.searchReferenceNumber);
-        if(this.searchResults.isEmpty())
-        {
-            FacesContext.getCurrentInstance().addMessage(searchReferenceNumber, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No car found for reference number: ".concat(searchReferenceNumber),null));
+        if (this.carList.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No new cars found ", null));
         }
     }
-    
-    public String performSearch(){
+
+    public void loadSearchResults() {
+        this.searchResults = carEJB.searchNewCarByReferenceNumber(this.searchReferenceNumber);
+        if (this.searchResults.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No car found for reference number: ".concat(searchReferenceNumber), null));
+        }
+    }
+
+    public String performSearch() {
         return "/NewCar/searchResults.xhtml";
     }
-    
+
     //Getters & Setters
-    public NewCar getCar(){
+    public NewCar getCar() {
         return this.car;
     }
-    public void setCar(NewCar car){
+
+    public void setCar(NewCar car) {
         this.car = car;
     }
-    
-    public List<NewCar> getCarList(){
+
+    public List<NewCar> getCarList() {
         return this.carList;
     }
-    public void setCarList(List<NewCar> carList){
+
+    public void setCarList(List<NewCar> carList) {
         this.carList = carList;
     }
 
@@ -95,5 +99,5 @@ public class NewCarController {
     public void setSearchResults(List<NewCar> searchResults) {
         this.searchResults = searchResults;
     }
-    
+
 }

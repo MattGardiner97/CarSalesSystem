@@ -25,51 +25,57 @@ import javax.faces.context.FacesContext;
 @Named(value = "usedCarController")
 @RequestScoped
 public class UsedCarController {
+
     @EJB
     private CarEJB carEJB;
     private UsedCar car = new UsedCar();
     private List<UsedCar> carList = new ArrayList<UsedCar>();
     private String searchReferenceNumber = "";
     private List<UsedCar> searchResults = new ArrayList<UsedCar>();
-    
-    
+
     public UsedCarController() {
-        
+
     }
-    
-    public String createCar(){
-         carEJB.createCar(car);
-        FacesContext.getCurrentInstance().addMessage(searchReferenceNumber, new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully created used car: ".concat(car.toString()),null));
+
+    public String createCar() {
+        car.setQuantity(1);
+        carEJB.createCar(car);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully created used car: ".concat(car.toString()), null));
         return "/UsedCar/listUsedCars.xhtml";
     }
-    
-    public void loadCarList(){
+
+    public void loadCarList() {
         this.carList = carEJB.getUsedCarList();
-    }
-    public void loadSearchResults(){
-        this.searchResults = carEJB.searchUsedCarByReferenceNumber(this.searchReferenceNumber);
-        if(this.searchResults.isEmpty())
-        {
-            FacesContext.getCurrentInstance().addMessage(searchReferenceNumber, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No car found for reference number: ".concat(searchReferenceNumber),null));
+        if (this.carList.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No used cars found ", null));
         }
     }
-    
-    public String performSearch(){
+
+    public void loadSearchResults() {
+        this.searchResults = carEJB.searchUsedCarByReferenceNumber(this.searchReferenceNumber);
+        if (this.searchResults.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No car found for reference number: ".concat(searchReferenceNumber), null));
+        }
+    }
+
+    public String performSearch() {
         return "/UsedCar/searchResults.xhtml";
     }
-    
+
     //Getters & Setters
-    public UsedCar getCar(){
-        return this .car;
+    public UsedCar getCar() {
+        return this.car;
     }
-    public void setCar(UsedCar car){
+
+    public void setCar(UsedCar car) {
         this.car = car;
     }
-    
-    public List<UsedCar> getCarList(){
+
+    public List<UsedCar> getCarList() {
         return this.carList;
     }
-    public void setCarList(List<UsedCar> carList){
+
+    public void setCarList(List<UsedCar> carList) {
         this.carList = carList;
     }
 
@@ -100,5 +106,5 @@ public class UsedCarController {
     public void setSearchResults(List<UsedCar> searchResults) {
         this.searchResults = searchResults;
     }
-    
+
 }

@@ -30,17 +30,24 @@ public class CustomerController {
     public CustomerController() {
     }
 
+    public void loadCustomerList() {
+        this.customerList = customerEJB.getCustomerList();
+        if (this.customerList.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No customers found ", null));
+        }
+    }
+
     // Public Methods           
     public String createCustomer() {
         customer = customerEJB.createCustomer(customer);
-        customerList = customerEJB.getCustomerList();
-        return "customerList.xhtml";
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully created the customer: ".concat(customer.getName()), null));
+        return "/Customer/customerList.xhtml";
     }
 
     public void loadSearchResults() {
         this.searchResults = customerEJB.searchByName(this.search);
         if (this.searchResults.isEmpty()) {
-            FacesContext.getCurrentInstance().addMessage(search, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No customer results found: ".concat(search), null));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No customer results found for: ".concat(search), null));
         }
     }
 
@@ -63,12 +70,11 @@ public class CustomerController {
         this.customer = customer;
     }
 
-    public List<CarSalesSystem.Entities.Customer> getCustomerList() {
-        customerList = customerEJB.getCustomerList();
+    public List<Customer> getCustomerList() {
         return customerList;
     }
 
-    public void setCustomerList(List<CarSalesSystem.Entities.Customer> customerList) {
+    public void setCustomerList(List<Customer> customerList) {
         this.customerList = customerList;
     }
 

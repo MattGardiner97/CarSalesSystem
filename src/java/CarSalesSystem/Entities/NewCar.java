@@ -19,7 +19,6 @@ public class NewCar extends Car implements Serializable {
 
     private int extendedWarrantyYears;
     private String roadsideAssistance;
-    private String quantity;
 
     //Standard constructor
     public NewCar() {
@@ -65,20 +64,6 @@ public class NewCar extends Car implements Serializable {
      */
     public void setRoadsideAssistance(String roadsideAssistance) {
         this.roadsideAssistance = roadsideAssistance;
-    }
-
-    /**
-     * @return the quantity
-     */
-    public String getQuantity() {
-        return quantity;
-    }
-
-    /**
-     * @param quantity the quantity to set
-     */
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
     }
 
 }

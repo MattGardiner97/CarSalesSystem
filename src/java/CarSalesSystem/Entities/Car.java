@@ -13,8 +13,10 @@ import javax.inject.Named;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "carFindAll", query = "SELECT c FROM Car c"), //Retrieves all cars from the database
-    @NamedQuery(name = "carFindByReferenceNumber", query = "SELECT c FROM Car c WHERE c.referenceNumber = :referenceNumber"), //Find a car by reference number
+    @NamedQuery(name = "carFindAll", query = "SELECT c FROM Car c")
+    , //Retrieves all cars from the database
+    @NamedQuery(name = "carFindByReferenceNumber", query = "SELECT c FROM Car c WHERE c.referenceNumber = :referenceNumber")
+    , //Find a car by reference number
     @NamedQuery(name = "carFindByID", query = "SELECT c FROM Car c WHERE c.id = :id")
 })
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -26,7 +28,7 @@ public class Car implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String referenceNumber;
 
     @Column(nullable = false)
@@ -49,15 +51,18 @@ public class Car implements Serializable {
 
     @Column(nullable = false)
     private String fuelType;
-    
+
     @Column(nullable = false)
     private int doors;
-    
+
     @Column(nullable = false)
     private int seats;
-    
+
     @Column(nullable = false)
     private int price;
+
+    @Column(nullable = false)
+    private int quantity;
 
     //Default constructor
     public Car() {
@@ -230,10 +235,10 @@ public class Car implements Serializable {
     public void setPrice(int price) {
         this.price = price;
     }
-    
-     @Override	
-    public String toString(){	
-        return String.format("%s %s", this.make,this.model);	
+
+    @Override
+    public String toString() {
+        return String.format("%s %s", this.make, this.model);
     }
 
     @Override
@@ -250,7 +255,7 @@ public class Car implements Serializable {
         }
         if (obj == null) {
             return false;
-        
+
         }
         final Car other = (Car) obj;
         if (!Objects.equals(this.id, other.id)) {
@@ -258,6 +263,19 @@ public class Car implements Serializable {
         }
         return true;
     }
-    
-    
+
+    /**
+     * @return the quantity
+     */
+    public int getQuantity() {
+        return quantity;
+    }
+
+    /**
+     * @param quantity the quantity to set
+     */
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
 }
