@@ -1,6 +1,7 @@
 package CarSalesSystem.Converters;
 
 import CarSalesSystem.Entities.Car;
+import CarSalesSystem.EJB.CarEJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;

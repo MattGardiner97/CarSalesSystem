@@ -24,12 +24,12 @@
                 </h:selectOneMenu>
 
                 <h:outputLabel value="Car:"/>
-                <h:selectOneMenu id="car_List" 
+                <h:selectOneMenu id="car_List"
                                  value="#{customerOrderController.customerOrder.orderedCar}" converter="carConverter">
                     <f:selectItems value="#{customerOrderController.carList}"
                                    var="car"
                                    itemValue="#{car}"
-                                   itemLabel="#{car.toString()}"/>
+                                   itemLabel="#{car.make}, #{car.model}"/>
                 </h:selectOneMenu>
 
                 <h:outputLabel value="Quantity: "/>

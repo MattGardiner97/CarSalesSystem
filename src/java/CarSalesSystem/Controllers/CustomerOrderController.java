@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
 
 
 @ManagedBean
@@ -32,9 +33,11 @@ public class CustomerOrderController {
     private CustomerOrder customerOrder = new CustomerOrder();
     private String search = "";
     private List<Customer> customerList;
+    
     private List<Car> carList;
     private List<CustomerOrder> searchResults = new ArrayList<CustomerOrder>();
     private List<CustomerOrder> customerOrderList = new ArrayList<CustomerOrder>();
+    private EntityManager em;
     
     public CustomerOrderController(){}
 

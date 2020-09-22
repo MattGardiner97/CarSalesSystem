@@ -58,6 +58,9 @@ public class Car implements Serializable {
     
     @Column(nullable = false)
     private int price;
+    
+    @Column(nullable = false)
+    private int quantity;
 
     //Default constructor
     public Car() {
@@ -229,6 +232,20 @@ public class Car implements Serializable {
      */
     public void setPrice(int price) {
         this.price = price;
+    }
+    
+    /**
+     * @return the quantity
+     */
+    public int getQuantity() {
+        return quantity;
+    }
+
+    /**
+     * @param quantity the quantity to set
+     */
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
     
      @Override	

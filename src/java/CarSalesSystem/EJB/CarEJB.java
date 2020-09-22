@@ -51,4 +51,8 @@ public class CarEJB {
         query.setParameter("referenceNumber", referenceNumber);
         return query.getResultList();
     }
+    
+    public void updateQuantity(NewCar newCar){
+        em.merge(newCar);
+    }
 }

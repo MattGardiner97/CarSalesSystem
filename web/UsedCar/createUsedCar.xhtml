@@ -61,6 +61,9 @@
 
                     <h:outputLabel value="History: "/>
                     <h:inputText value="#{usedCarController.car.history}"/>
+                    
+                    <h:outputLabel value="Quantity: "/>
+                <h:inputText value="#{usedCarController.car.quantity}"/>
                 </h:panelGrid>
 
                 <h:commandButton value="Save" action="#{usedCarController.createCar}"/>
