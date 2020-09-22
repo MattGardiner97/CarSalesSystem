@@ -33,7 +33,6 @@ public class CustomerOrderEJB {
         em.merge(car);
         
         customer = em.find(Customer.class, c.getCustomer().getId());
-        customer.setOrderNumber(customer.getOrderNumber() + 1);
         em.merge(customer);
         return c;
     }
