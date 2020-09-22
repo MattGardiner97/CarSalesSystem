@@ -22,21 +22,14 @@ public class CustomerOrderEJB {
 
     //Creates the list to search through and presist
     public CustomerOrder createCustomerOrder(CustomerOrder c){
-        //System.out.println(c.);
-        //car = em.find(Car.class, c.getId());
-        //System.out.println("Car is class: " + car);
         em.persist(c);
         System.out.println("ORDER ID: " + c.getId());
-        //car = em.find(Car.class, car.getId());
-        //System.out.println("Car Class: " + car.getClass() + "\nCar Details: " + car.getQuantity());
-        System.out.println("Car ID: " + c.getOrderedCar().getId() + "\nCar Quantity: " + c.getOrderedCar().getQuantity());
+        car = em.find(Car.class, c.getOrderedCar().getId());
+        System.out.println("Car ID: " + car.getId() + "\nCar Quantity: " + car.getQuantity() + "\n Make & Model: " + car.getMake() + ", " + car.getModel());
+        car.setQuantity(car.getQuantity() - c.getQuantity());
+        System.out.println("Updated Car Quantity: " + car.getQuantity());
+        em.merge(car);
         return c;
-        //System.out.println("ID IS: " + id);
-        //car = em.find(Car.class, id);
-        //System.out.println(car.getClass());
-                /*TypedQuery<UsedCar> query = em.createNamedQuery("usedCarFindByReference",UsedCar.class);
-        query.setParameter("referenceNumber", referenceNumber);
-        return query.getResultList();*/
     }
 
     //returns all orders
