@@ -13,6 +13,8 @@ import javax.faces.bean.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 
@@ -30,7 +32,7 @@ public class CustomerOrderController {
     private CarEJB carEJB;
     
     private CustomerOrder customerOrder = new CustomerOrder();
-    private String search = "";
+    private long search = 0;
     private List<Customer> customerList;
     private List<Car> carList;
     private List<CustomerOrder> searchResults = new ArrayList<CustomerOrder>();
@@ -43,6 +45,16 @@ public class CustomerOrderController {
         customerOrder = customerOrderEJB.createCustomerOrder(customerOrder);
         customerOrderList = customerOrderEJB.findCustomerOrder();
         return "/CustomerOrder/orderList.xhtml";
+    }
+    
+    public void loadSearchResults() {
+        System.out.println("Load Search Results before if, search = " + search);
+            
+        this.searchResults = customerOrderEJB.searchById(this.search);
+        if (this.searchResults.isEmpty()) {
+            System.out.println("Load Search Results, search = " + search);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No order results found for: ".concat(Long.toString(search)), null));
+        }
     }
     
     public void createOrder_PageLoad(){
@@ -68,11 +80,11 @@ public class CustomerOrderController {
         this.customerOrderList = customerOrderList;
     }
     
-    public String getSearch(){
+    public long getSearch(){
         return search;
     }
     
-    public void setSearch(String search) {
+    public void setSearch(long search) {
         this.search = search;
     }
     
@@ -115,5 +127,6 @@ public class CustomerOrderController {
     public void setCarList(List<Car> carList) {
         this.carList = carList;
     }
+
     
 }

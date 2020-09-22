@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition template="/layout.xhtml">
+        <ui:define name="title">Find a Customer</ui:define>
+        <ui:define name="header">The Found Customer</ui:define>
+
+        <ui:define name="content">            
+            <f:metadata>
+                <f:viewParam name="searchName" value="#{customerOrderController.search}"/>
+                <f:event type="preRenderView" listener="#{customerOrderController.loadSearchResults}"/>
+            </f:metadata>
+
+            <h:messages style="color:red"/>
+
+            <h:dataTable value="#{customerOrderController.searchResults}" var="o" border="1" rendered="#{customerOrderController.searchResults.isEmpty() == false}">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Order #"/>
+                    </f:facet>
+                    <h:outputText value="#{o.id}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Customer"/>
+                    </f:facet>
+                    <h:outputText value="#{o.customer.name}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Car"/>
+                    </f:facet>
+                    <h:outputText value="#{o.orderedCar.model}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Created At"/>
+                    </f:facet>
+                    <h:outputText value="Dear god why is this a thing"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Unit Price"/>
+                    </f:facet>
+                    <h:outputText value="$#{o.orderedCar.price}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Unit Price"/>
+                    </f:facet>
+                    <h:outputText value="$#{o.orderedCar.quantity}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Total Price"/>
+                    </f:facet>
+                    <h:outputText value="Again, why is this a thing"/>
+                </h:column>
+            </h:dataTable>
+
+            <br/>
+
+            <div>
+                Total customers: #{customerOrderController.searchResults.size()}
+            </div>
+        </ui:define>
+
+        <ui:define name="footer">
+            <h:link value="Create a new Order" outcome="/CustomerOrder/createOrder.xhtml"/>
+        </ui:define>
+    </ui:composition>
+</html>
+

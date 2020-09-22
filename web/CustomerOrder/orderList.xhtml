@@ -12,6 +12,13 @@
         <h:dataTable value="#{customerOrderController.customerOrderList}" var="c" border="1">
             <h:column>
                 <f:facet name="header">
+                    <h:outputText value="Order #"/>
+                </f:facet>
+                <h:outputText value="#{c.id}"/>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">
                     <h:outputText value="Customer Name"/>
                 </f:facet>
                 <h:outputText value="#{c.customer.name}"/>
@@ -21,7 +28,7 @@
                 <f:facet name="header">
                     <h:outputText value="Car"/>
                 </f:facet>
-                <h:outputText value="#{c.orderedCar.make}"/>
+                <h:outputText value="#{c.orderedCar.model}"/>
             </h:column>
 
             <h:column>

@@ -45,6 +45,7 @@ public class CustomerController {
     }
 
     public void loadSearchResults() {
+        System.out.println("Search for Customer =" + search);
         this.searchResults = customerEJB.searchByName(this.search);
         if (this.searchResults.isEmpty()) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No customer results found for: ".concat(search), null));
