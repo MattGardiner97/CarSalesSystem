@@ -32,6 +32,8 @@ public class Customer implements Serializable {
 
     private String phoneNumber;
     private String emailAddress;
+    
+    private int orderNumber;
 
     //Represents all orders made by a customer
     @OneToMany(fetch = FetchType.LAZY)
@@ -41,6 +43,7 @@ public class Customer implements Serializable {
     //Standard constructor
     public Customer() {
         customerOrders = new ArrayList<CustomerOrder>();
+        orderNumber = 0;
     }
 
     /**
@@ -124,6 +127,14 @@ public class Customer implements Serializable {
         this.customerOrders = customerOrders;
     }
 
+    public int getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(int orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;

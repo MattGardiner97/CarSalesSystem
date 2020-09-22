@@ -6,6 +6,7 @@
 package CarSalesSystem.EJB;
 
 import CarSalesSystem.Entities.Car;
+import CarSalesSystem.Entities.Customer;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,6 +20,7 @@ public class CustomerOrderEJB {
     @PersistenceContext(unitName = "CarSalesSystemPU")
     private EntityManager em;
     private Car car;
+    private Customer customer;
 
     //Creates the list to search through and presist
     public CustomerOrder createCustomerOrder(CustomerOrder c){
@@ -29,6 +31,10 @@ public class CustomerOrderEJB {
         car.setQuantity(car.getQuantity() - c.getQuantity());
         System.out.println("Updated Car Quantity: " + car.getQuantity());
         em.merge(car);
+        
+        customer = em.find(Customer.class, c.getCustomer().getId());
+        customer.setOrderNumber(customer.getOrderNumber() + 1);
+        em.merge(customer);
         return c;
     }
 
