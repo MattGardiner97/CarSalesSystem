@@ -10,7 +10,7 @@
         <f:metadata>
             <f:event type="preRenderView" listener="#{customerOrderController.createOrder_PageLoad}"/>
         </f:metadata>
-        
+
         <h1>Create a new car order</h1>
         <hr/>
         <h:form>
@@ -24,7 +24,7 @@
                 </h:selectOneMenu>
 
                 <h:outputLabel value="Car:"/>
-                <h:selectOneMenu id="car_List" 
+                <h:selectOneMenu id="car_List"
                                  value="#{customerOrderController.customerOrder.orderedCar}" converter="carConverter">
                     <f:selectItems value="#{customerOrderController.carList}"
                                    var="car"

@@ -60,6 +60,9 @@ public class Car implements Serializable {
 
     @Column(nullable = false)
     private int price;
+    
+    @Column(nullable = false)
+    private int quantity;
 
     @Column(nullable = false)
     private int quantity;
