@@ -13,11 +13,10 @@
             <f:metadata>
             <f:event type="preRenderView" listener="#{usedCarController.loadCarList}"/>
         </f:metadata>
-        <h1>List of Used Cars</h1>
+            
+        <h:messages style="color:blue" />       
 
-        <h:message for="carList" id="creationMessage"/>       
-
-        <h:dataTable value="#{usedCarController.carList}" var="car" border="1" id="carList">
+        <h:dataTable value="#{usedCarController.carList}" var="car" border="1" id="carList" rendered="#{usedCarController.carList.isEmpty() == false}">
             <h:column>
                 <f:facet name="header">
                     <h:outputText value="Make"/>
@@ -40,6 +39,12 @@
                 </h:link>
             </h:column>            
         </h:dataTable>
+        
+        <br/>
+        
+        <div>
+            Total used cars: #{usedCarController.carList.size()}
+        </div>
         </ui:define>
         
         <ui:define name="footer">

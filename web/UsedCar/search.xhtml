@@ -1,19 +1,26 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        <h1>Search for a used car</h1>
-        
-        <h:form>
-            <h:outputLabel value="Reference Number: "/>
-            <h:inputText id="searchReferenceNumber" value="#{usedCarController.searchReferenceNumber}"/>
-            <h:commandButton value="Search" action="#{usedCarController.performSearch}"/>
-            <h:message for="searchReferenceNumber" id="searchErrorMessage"/>
-        </h:form>
-    </h:body>
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition template="/layout.xhtml">
+        <ui:define name="title">Search for a used car</ui:define>
+        <ui:define name="header">Search for a used car</ui:define>
+
+        <ui:define name="content">
+            <h:form>
+                <h:outputLabel value="Reference Number: "/>
+                <h:inputText id="searchReferenceNumber" value="#{usedCarController.searchReferenceNumber}"/>
+                <h:commandButton value="Search" action="#{usedCarController.performSearch}"/>
+                <h:message for="searchReferenceNumber" id="searchErrorMessage"/>
+            </h:form>
+        </ui:define>
+
+        <ui:define name="footer">
+            <h:link value="The stock of used cars" outcome="/UsedCar/listUsedCars.xhtml"/>
+        </ui:define>
+
+    </ui:composition>
 </html>
 

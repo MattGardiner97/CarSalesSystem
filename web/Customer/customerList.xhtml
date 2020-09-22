@@ -2,43 +2,61 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
-    <h:head>
-        <title>Customer List</title>
-    </h:head>
-    <h:body>
-        <h1>Customer List</h1>
-        <hr/>
-        <h:dataTable value="#{customerController.customerList}" var="c" border="1">
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Name"/>
-                </f:facet>
-                <h:outputText value="#{c.name}"/>
-            </h:column>
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Address"/>
-                </f:facet>
-                <h:outputText value="#{c.address}"/>
-            </h:column>
+    <ui:composition template="/layout.xhtml">
+        <ui:define name="title">List of Customers</ui:define>
+        <ui:define name="header">List of Customers</ui:define>
 
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Orders"/>
-                </f:facet>
-                <h:outputText value="0"/>
-            </h:column>
+        <ui:define name="content">
+            <f:metadata>
+                <f:event type="preRenderView" listener="#{customerController.loadCustomerList}"/>
+            </f:metadata>
+            
+            <h:messages style="color:blue"/>
+            
+            <h:dataTable value="#{customerController.customerList}" var="c" border="1" rendered="#{customerController.customerList.isEmpty() == false}">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Name"/>
+                    </f:facet>
+                    <h:outputText value="#{c.name}"/>
+                </h:column>
 
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Action"/>
-                </f:facet>
-                <h:link value="View Details" outcome="/Customer/customerDetails.xhtml">
-                    <f:param name="customerID" value="#{c.id}"/>
-                </h:link>
-            </h:column>
-        </h:dataTable>
-    </h:body>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Address"/>
+                    </f:facet>
+                    <h:outputText value="#{c.address}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Orders"/>
+                    </f:facet>
+                    <h:outputText value="0"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Action"/>
+                    </f:facet>
+                    <h:link value="View Details" outcome="/Customer/customerDetails.xhtml">
+                        <f:param name="customerID" value="#{c.id}"/>
+                    </h:link>
+                </h:column>
+            </h:dataTable>
+            
+            <br/>
+            
+            <div>
+                Total customers: #{customerController.customerList.size()}
+            </div>
+        </ui:define>
+        
+        <ui:define name="footer">
+            <h:link value="Create a new customer" outcome="/Customer/createCustomer.xhtml"/>
+        </ui:define>
+    </ui:composition>
 </html>

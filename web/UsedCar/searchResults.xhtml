@@ -2,138 +2,159 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        <f:metadata>
-            <f:viewParam name="searchReferenceNumber" value="#{usedCarController.searchReferenceNumber}"/>
-            <f:event type="preRenderView" listener="#{usedCarController.loadSearchResults}"/>
-        </f:metadata>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition template="/layout.xhtml">
+        <ui:define name="title">Find a used car</ui:define>
+        <ui:define name="header">The found used car</ui:define>
+
+        <ui:define name="content">
+            <f:metadata>
+                <f:viewParam name="searchReferenceNumber" value="#{usedCarController.searchReferenceNumber}"/>
+                <f:event type="preRenderView" listener="#{usedCarController.loadSearchResults}"/>
+            </f:metadata>
+            
+            <h:messages style="color:red"/>
+
+            <h:dataTable value="#{usedCarController.searchResults}" var="car" border="1" rendered="#{usedCarController.searchResults.isEmpty() == false}">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Reference Number"/>
+                    </f:facet>
+                    <h:outputText value="#{car.referenceNumber}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Make"/>
+                    </f:facet>
+                    <h:outputText value="#{car.make}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Model"/>
+                    </f:facet>
+                    <h:outputText value="#{car.model}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Drive Type"/>
+                    </f:facet>
+                    <h:outputText value="#{car.driveType}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Colour"/>
+                    </f:facet>
+                    <h:outputText value="#{car.colour}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Transmission"/>
+                    </f:facet>
+                    <h:outputText value="#{car.transmission}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Engine"/>
+                    </f:facet>
+                    <h:outputText value="#{car.engine}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Fuel Type"/>
+                    </f:facet>
+                    <h:outputText value="#{car.fuelType}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Doors"/>
+                    </f:facet>
+                    <h:outputText value="#{car.doors}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Seats"/>
+                    </f:facet>
+                    <h:outputText value="#{car.seats}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Quantity"/>
+                    </f:facet>
+                    <h:outputText value="#{car.quantity}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Odometer"/>
+                    </f:facet>
+                    <h:outputText value="#{car.odometer}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Registration Number"/>
+                    </f:facet>
+                    <h:outputText value="#{car.registrationNumber}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Registration Expiry"/>
+                    </f:facet>
+                    <h:outputText value="#{car.registrationExpiry}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Service History"/>
+                    </f:facet>
+                    <h:outputText value="#{car.serviceHistory}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Vehicle Identification Number"/>
+                    </f:facet>
+                    <h:outputText value="#{car.vehicleIdentificationNumber}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="History"/>
+                    </f:facet>
+                    <h:outputText value="#{car.history}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Price"/>
+                    </f:facet>
+                    <h:outputText value="#{car.price}"/>
+                </h:column>
+            </h:dataTable>
+            
+            <br/>
+            
+            <div>
+                Total used cars: #{usedCarController.searchResults.size()}
+            </div>
+        </ui:define>
         
-        <h:dataTable value="#{usedCarController.searchResults}" var="car" border="1">
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Reference Number"/>
-                </f:facet>
-                <h:outputText value="#{car.referenceNumber}"/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Make"/>
-                </f:facet>
-                <h:outputText value="#{car.make}"/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Model"/>
-                </f:facet>
-                <h:outputText value="#{car.model}"/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Drive Type"/>
-                </f:facet>
-                <h:outputText value="#{car.driveType}"/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Colour"/>
-                </f:facet>
-                <h:outputText value="#{car.colour}"/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Transmission"/>
-                </f:facet>
-                <h:outputText value="#{car.transmission}"/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Engine"/>
-                </f:facet>
-                <h:outputText value="#{car.engine}"/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Fuel Type"/>
-                </f:facet>
-                <h:outputText value="#{car.fuelType}"/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Doors"/>
-                </f:facet>
-                <h:outputText value="#{car.doors}"/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Seats"/>
-                </f:facet>
-                <h:outputText value="#{car.seats}"/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Odometer"/>
-                </f:facet>
-                <h:outputText value="#{car.odometer}"/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Registration Number"/>
-                </f:facet>
-                <h:outputText value="#{car.registrationNumber}"/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Registration Expiry"/>
-                </f:facet>
-                <h:outputText value="#{car.registrationExpiry}"/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Service History"/>
-                </f:facet>
-                <h:outputText value="#{car.serviceHistory}"/>
-            </h:column>
-            
-             <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Vehicle Identification Number"/>
-                </f:facet>
-                 <h:outputText value="#{car.vehicleIdentificationNumber}"/>
-            </h:column>
-            
-             <h:column>
-                <f:facet name="header">
-                    <h:outputText value="History"/>
-                </f:facet>
-                <h:outputText value="#{car.history}"/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Price"/>
-                </f:facet>
-                <h:outputText value="#{car.price}"/>
-            </h:column>
-
-
-        </h:dataTable>
-    </h:body>
+        <ui:define name="footer">
+            <h:link value="Create a used car" outcome="/UsedCar/createUsedCar.xhtml"/>
+        </ui:define>
+    </ui:composition>
 </html>
 

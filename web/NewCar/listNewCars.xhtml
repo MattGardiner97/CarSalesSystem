@@ -14,9 +14,9 @@
                 <f:event type="preRenderView" listener="#{newCarController.loadCarList}"/>
             </f:metadata>
 
-            <h:message for="carList" id="creationMessage"/>       
+            <h:messages style="color:blue"/>       
 
-            <h:dataTable value="#{newCarController.carList}" var="car" border="1" id="carList">
+            <h:dataTable value="#{newCarController.carList}" var="car" border="1" id="carList" rendered="#{newCarController.carList.isEmpty() == false}">
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Make"/>
@@ -39,6 +39,12 @@
                     </h:link>
                 </h:column>            
             </h:dataTable>
+            
+            <br/>
+            
+            <div>
+                Total brand new cars: #{newCarController.carList.size()}
+            </div>
         </ui:define>
         
         <ui:define name="footer">
