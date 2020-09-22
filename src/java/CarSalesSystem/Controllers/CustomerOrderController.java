@@ -15,12 +15,13 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.flow.FlowScoped;
 import javax.inject.Named;
 
 
 @ManagedBean
 @Named(value="customerOrderController")
-@ViewScoped
+@SessionScoped
 public class CustomerOrderController {
     
     // Attributes             
@@ -55,6 +56,10 @@ public class CustomerOrderController {
             System.out.println("Load Search Results, search = " + search);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No order results found for: ".concat(Long.toString(search)), null));
         }
+    }
+    
+    public String performSearch(){
+        return "/CustomerOrder/searchResults.xhtml";
     }
     
     public void createOrder_PageLoad(){
@@ -96,9 +101,7 @@ public class CustomerOrderController {
         this.searchResults = searchResults;
     }
         
-    public String performSearch(){
-        return "/CustomerOrder/searchResults.xhtml";
-    }
+    
 
     /**
      * @return the customerList
