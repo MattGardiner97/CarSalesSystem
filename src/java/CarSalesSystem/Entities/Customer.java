@@ -34,7 +34,7 @@ public class Customer implements Serializable {
     private String emailAddress;
 
     //Represents all orders made by a customer
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     @JoinColumn
     private List<CustomerOrder> customerOrders;
 

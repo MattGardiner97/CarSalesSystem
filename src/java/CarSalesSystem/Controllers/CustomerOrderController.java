@@ -34,6 +34,7 @@ public class CustomerOrderController {
     
     private CustomerOrder customerOrder = new CustomerOrder();
     private long search = 0;
+    private String details = "";
     private List<Customer> customerList;
     private List<Car> carList;
     private List<CustomerOrder> searchResults = new ArrayList<CustomerOrder>();
@@ -55,6 +56,14 @@ public class CustomerOrderController {
         if (this.searchResults.isEmpty()) {
             System.out.println("Load Search Results, search = " + search);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No order results found for: ".concat(Long.toString(search)), null));
+        }
+    }
+    
+    public void loadDetails() {
+        this.searchResults = customerOrderEJB.searchById(search);
+        System.out.println(searchResults);
+        if (this.searchResults == null) {
+            FacesContext.getCurrentInstance().addMessage(details, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No customer orders found for ID: ".concat(Long.toString(search)), null));
         }
     }
     

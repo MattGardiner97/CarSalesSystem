@@ -40,14 +40,17 @@ public class CustomerOrderEJB {
     //returns all orders
     public List<CustomerOrder> findCustomerOrder() {
         TypedQuery<CustomerOrder> query = em.createNamedQuery("orderFindAll", CustomerOrder.class);
+        System.out.println(query.getResultList());
         return query.getResultList();
     }
     
     public List<CustomerOrder> searchById(Long search){
         System.out.println("searchById, search = " + search);
+        System.out.println("class: " + search.getClass());
 
-        TypedQuery<CustomerOrder> query = em.createNamedQuery("orderFindId", CustomerOrder.class);
-        query.setParameter("id", search);
+        TypedQuery<CustomerOrder> query = em.createNamedQuery("orderFindId", CustomerOrder.class).setParameter("id", search);
+        //query.setParameter("id", search);
+        System.out.println(query.getResultList());
         return query.getResultList();
     }
 }

@@ -11,8 +11,7 @@ import javax.persistence.*;
 @Entity
 
 @NamedQueries({
-    @NamedQuery(name = "orderFindAll", query = "SELECT o FROM CustomerOrder o")
-    , //Finds all orders
+    @NamedQuery(name = "orderFindAll", query = "SELECT o FROM CustomerOrder o"), //Finds all orders
     @NamedQuery(name = "orderFindId", query = "SELECT o FROM CustomerOrder o WHERE o.id = :id"), //Finds an order by order number
 })
 

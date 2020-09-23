@@ -15,7 +15,6 @@
             </f:metadata>
             
             <h:messages style="color:blue"/>
-            
             <h:dataTable value="#{customerController.customerList}" var="c" border="1" rendered="#{customerController.customerList.isEmpty() == false}">
                 <h:column>
                     <f:facet name="header">
@@ -35,7 +34,7 @@
                     <f:facet name="header">
                         <h:outputText value="Orders"/>
                     </f:facet>
-                    <h:outputText value="0"/>
+                    <h:outputText value="#{c.customerOrders.size()}"/>
                 </h:column>
 
                 <h:column>
