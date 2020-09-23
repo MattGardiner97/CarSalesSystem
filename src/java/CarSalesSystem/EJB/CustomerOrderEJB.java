@@ -2,7 +2,6 @@
 //Author: Jack Pashley - 12002954
 //Last modified: 16/9/2020
 //Purpose: Class representing a customer order entity
-
 package CarSalesSystem.EJB;
 
 import CarSalesSystem.Entities.Car;
@@ -23,34 +22,26 @@ public class CustomerOrderEJB {
     private Customer customer;
 
     //Creates the list to search through and presist
-    public CustomerOrder createCustomerOrder(CustomerOrder c){
-        em.persist(c);
-        System.out.println("ORDER ID: " + c.getId());
-        car = em.find(Car.class, c.getOrderedCar().getId());
-        System.out.println("Car ID: " + car.getId() + "\nCar Quantity: " + car.getQuantity() + "\n Make & Model: " + car.getMake() + ", " + car.getModel());
-        car.setQuantity(car.getQuantity() - c.getQuantity());
-        System.out.println("Updated Car Quantity: " + car.getQuantity());
+    public CustomerOrder createCustomerOrder(CustomerOrder order) {
+        em.persist(order);
+        car = em.find(Car.class, order.getOrderedCar().getId());
+        car.setQuantity(car.getQuantity() - order.getQuantity());
         em.merge(car);
-        
-        customer = em.find(Customer.class, c.getCustomer().getId());
+
+        customer = em.find(Customer.class, order.getCustomer().getId());
+        customer.getCustomerOrders().add(order);
         em.merge(customer);
-        return c;
+        return order;
     }
 
     //returns all orders
-    public List<CustomerOrder> findCustomerOrder() {
+    public List<CustomerOrder> getAllCustomerOrders() {
         TypedQuery<CustomerOrder> query = em.createNamedQuery("orderFindAll", CustomerOrder.class);
-        System.out.println(query.getResultList());
         return query.getResultList();
     }
-    
-    public List<CustomerOrder> searchById(Long search){
-        System.out.println("searchById, search = " + search);
-        System.out.println("class: " + search.getClass());
 
+    public List<CustomerOrder> searchById(Long search) {
         TypedQuery<CustomerOrder> query = em.createNamedQuery("orderFindId", CustomerOrder.class).setParameter("id", search);
-        //query.setParameter("id", search);
-        System.out.println(query.getResultList());
         return query.getResultList();
     }
 }

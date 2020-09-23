@@ -21,7 +21,7 @@ import javax.inject.Named;
 
 @ManagedBean
 @Named(value="customerOrderController")
-@SessionScoped
+@ViewScoped
 public class CustomerOrderController {
     
     // Attributes             
@@ -45,13 +45,11 @@ public class CustomerOrderController {
     // Public Methods           
     public String createCustomerOrder() {
         customerOrder = customerOrderEJB.createCustomerOrder(customerOrder);
-        customerOrderList = customerOrderEJB.findCustomerOrder();
+        customerOrderList = customerOrderEJB.getAllCustomerOrders();
         return "/CustomerOrder/orderList.xhtml";
     }
     
-    public void loadSearchResults() {
-        System.out.println("Load Search Results before if, search = " + search);
-            
+    public void loadSearchResults() {           
         this.searchResults = customerOrderEJB.searchById(this.search);
         if (this.searchResults.isEmpty()) {
             System.out.println("Load Search Results, search = " + search);
@@ -86,7 +84,7 @@ public class CustomerOrderController {
     }
 
     public List<CarSalesSystem.Entities.CustomerOrder> getCustomerOrderList() {
-        customerOrderList = customerOrderEJB.findCustomerOrder();
+        customerOrderList = customerOrderEJB.getAllCustomerOrders();
         return customerOrderList;
     }
 

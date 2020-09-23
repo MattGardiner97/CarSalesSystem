@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
 
-@Entity
+ @Entity
 @NamedQueries({
     @NamedQuery(name = "customerFindAll", query = "SELECT c FROM Customer c") //Finds all customers
     ,
