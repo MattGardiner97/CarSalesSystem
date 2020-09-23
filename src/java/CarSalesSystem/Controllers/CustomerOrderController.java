@@ -33,11 +33,9 @@ public class CustomerOrderController {
     private CarEJB carEJB;
     
     private CustomerOrder customerOrder = new CustomerOrder();
-    private long search = 0;
     private String details = "";
     private List<Customer> customerList;
     private List<Car> carList;
-    private List<CustomerOrder> searchResults = new ArrayList<CustomerOrder>();
     private List<CustomerOrder> customerOrderList = new ArrayList<CustomerOrder>();
     
     public CustomerOrderController(){}
@@ -49,20 +47,8 @@ public class CustomerOrderController {
         return "/CustomerOrder/orderList.xhtml";
     }
     
-    public void loadSearchResults() {           
-        this.searchResults = customerOrderEJB.searchById(this.search);
-        if (this.searchResults.isEmpty()) {
-            System.out.println("Load Search Results, search = " + search);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No order results found for: ".concat(Long.toString(search)), null));
-        }
-    }
-    
     public void loadDetails() {
-        this.searchResults = customerOrderEJB.searchById(search);
-        System.out.println(searchResults);
-        if (this.searchResults == null) {
-            FacesContext.getCurrentInstance().addMessage(details, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No customer orders found for ID: ".concat(Long.toString(search)), null));
-        }
+        
     }
     
     public String performSearch(){
@@ -88,25 +74,10 @@ public class CustomerOrderController {
         return customerOrderList;
     }
 
-    public void setCustomerOrderList(List<CarSalesSystem.Entities.Customer> customerList) {
+    public void setCustomerOrderList(List<CarSalesSystem.Entities.Customer> customerOrderList) {
         this.customerOrderList = customerOrderList;
     }
-    
-    public long getSearch(){
-        return search;
-    }
-    
-    public void setSearch(long search) {
-        this.search = search;
-    }
-    
-    public List<CustomerOrder> getSearchResults() {
-        return searchResults;
-    }
-    
-    public void setSearchResults(List<CustomerOrder> searchResults) {
-        this.searchResults = searchResults;
-    }
+   
         
     
 

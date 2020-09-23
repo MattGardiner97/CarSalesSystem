@@ -9,9 +9,9 @@
 
         <ui:define name="content">
             <h:form>
-                <h:outputLabel value="Order #"/>
-                <h:inputText id="searchReferenceNumber" value="#{customerOrderController.search}"/>
-                <h:commandButton value="Search" action="#{customerOrderController.performSearch}"/>
+                <h:outputLabel value="Order # "/>
+                <h:inputText id="searchReferenceNumber" value="#{orderSearchController.searchID}"/>
+                <h:commandButton value="Search" action="#{orderSearchController.performSearch}"/>
                 <h:message for="search" id="searchErrorMessage"/>
             </h:form>
         </ui:define>

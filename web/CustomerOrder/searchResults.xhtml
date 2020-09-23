@@ -6,37 +6,32 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <ui:composition template="/layout.xhtml">
-        <ui:define name="title">Find a Customer</ui:define>
-        <ui:define name="header">The Found Customer</ui:define>
+        <ui:define name="title">Find an Order</ui:define>
+        <ui:define name="header">The Found Order</ui:define>
 
         <ui:define name="content">            
-            <f:metadata>
-                <f:viewParam name="searchName" value="#{customerOrderController.search}"/>
-                <f:event type="preRenderView" listener="#{customerOrderController.loadSearchResults}"/>
-            </f:metadata>
-
             <h:messages style="color:red"/>
 
-            <h:dataTable value="#{customerOrderController.searchResults}" var="o" border="1" rendered="#{customerOrderController.searchResults.isEmpty() == false}">
+            <h:dataTable value="#{orderSearchController.searchResults}" var="order" border="1" rendered="#{orderSearchController.searchResults.isEmpty() == false}">
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Order #"/>
                     </f:facet>
-                    <h:outputText value="#{o.id}"/>
+                    <h:outputText value="#{order.id}"/>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Customer"/>
                     </f:facet>
-                    <h:outputText value="#{o.customer.name}"/>
+                    <h:outputText value="#{order.customer.name}"/>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Car"/>
                     </f:facet>
-                    <h:outputText value="#{o.orderedCar.model}"/>
+                    <h:outputText value="#{order.orderedCar.model}"/>
                 </h:column>
 
                 <h:column>
@@ -50,14 +45,14 @@
                     <f:facet name="header">
                         <h:outputText value="Unit Price"/>
                     </f:facet>
-                    <h:outputText value="$#{o.orderedCar.price}"/>
+                    <h:outputText value="$#{order.orderedCar.price}"/>
                 </h:column>
                 
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Unit Price"/>
                     </f:facet>
-                    <h:outputText value="$#{o.orderedCar.quantity}"/>
+                    <h:outputText value="$#{order.orderedCar.quantity}"/>
                 </h:column>
                 
                 <h:column>
