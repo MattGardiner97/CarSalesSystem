@@ -16,7 +16,7 @@ import javax.persistence.*;
     ,
     @NamedQuery(name = "customerFindByName", query = "SELECT c FROM Customer c WHERE lower(c.name) = lower(:name)") //Finds a customer by name
     ,
-    @NamedQuery(name = "customerFindById", query = "SELECT c FROM Customer c WHERE c.id = :id")
+    @NamedQuery(name = "customerFindByID", query = "SELECT c FROM Customer c WHERE c.id = :id")
 })
 public class Customer implements Serializable {
 
