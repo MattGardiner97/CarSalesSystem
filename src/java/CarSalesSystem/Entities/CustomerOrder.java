@@ -6,6 +6,7 @@
 package CarSalesSystem.Entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
 
 @Entity
@@ -29,6 +30,10 @@ public class CustomerOrder implements Serializable {
 
     @Column(nullable = false)
     private int quantity;
+    
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
 
     //Standard constructor
     public CustomerOrder() {
@@ -95,5 +100,19 @@ public class CustomerOrder implements Serializable {
      */
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    /**
+     * @return the createdAt
+     */
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    /**
+     * @param createdAt the createdAt to set
+     */
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }

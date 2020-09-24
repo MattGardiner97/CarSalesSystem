@@ -24,49 +24,57 @@
                     <f:facet name="header">
                         <h:outputText value="Customer"/>
                     </f:facet>
-                    <h:outputText value="#{order.customer.name}"/>
+                    <h:link value="#{order.customer.name}" outcome="/Customer/customerDetails.xhtml">
+                        <f:param name="customerID" value="#{order.customer.id}"/>
+                    </h:link>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Car"/>
                     </f:facet>
-                    <h:outputText value="#{order.orderedCar.model}"/>
+                    <h:link value="#{order.orderedCar.toString()}" outcome="#{customerOrderController.getCarLinkString(order.orderedCar)}">
+                        <f:param name="searchReferenceNumber" value="#{order.orderedCar.referenceNumber}"/>
+                    </h:link>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Created At"/>
                     </f:facet>
-                    <h:outputText value="Dear god why is this a thing"/>
+                    <h:outputText value="#{order.createdAt}"/>
                 </h:column>
                 
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Unit Price"/>
                     </f:facet>
-                    <h:outputText value="$#{order.orderedCar.price}"/>
+                    <h:outputText value="#{order.orderedCar.price}">
+                        <f:convertNumber type="currency"/>
+                    </h:outputText>
                 </h:column>
                 
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="Unit Price"/>
+                        <h:outputText value="Quantity"/>
                     </f:facet>
-                    <h:outputText value="$#{order.orderedCar.quantity}"/>
+                    <h:outputText value="#{order.quantity}"/>
                 </h:column>
                 
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Total Price"/>
                     </f:facet>
-                    <h:outputText value="Again, why is this a thing"/>
+                    <h:outputText value="#{order.orderedCar.price * order.quantity}">
+                        <f:convertNumber type="currency"/>
+                    </h:outputText>
                 </h:column>
             </h:dataTable>
 
             <br/>
 
             <div>
-                Total customers: #{customerOrderController.searchResults.size()}
+                Total customers: #{orderSearchController.searchResults.size()}
             </div>
         </ui:define>
 
