@@ -22,6 +22,7 @@ public class CarEJB {
 
     public Car findByID(long ID){
         TypedQuery<Car> query = em.createNamedQuery("carFindByID",Car.class);
+        query.setParameter("id", ID);
         return query.getSingleResult();
     }
     

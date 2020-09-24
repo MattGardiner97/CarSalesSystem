@@ -42,6 +42,12 @@ public class CustomerOrderController {
 
     // Public Methods           
     public String createCustomerOrder() {
+        Car requestedCar = carEJB.findByID(customerOrder.getOrderedCar().getId());
+        if(customerOrder.getQuantity() > requestedCar.getQuantity())
+        {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "There are not enough vehicles in stock to fulfill your order.", null));
+            return null;
+        }
         customerOrder = customerOrderEJB.createCustomerOrder(customerOrder);
         customerOrderList = customerOrderEJB.getAllCustomerOrders();
         return "/CustomerOrder/orderList.xhtml";
@@ -74,7 +80,7 @@ public class CustomerOrderController {
         return customerOrderList;
     }
 
-    public void setCustomerOrderList(List<CarSalesSystem.Entities.Customer> customerOrderList) {
+    public void setCustomerOrderList(List<CustomerOrder> customerOrderList) {
         this.customerOrderList = customerOrderList;
     }
    

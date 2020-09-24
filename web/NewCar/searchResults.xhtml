@@ -17,7 +17,7 @@
             
             <h:messages style="color:red"/>
 
-            <h:dataTable value="#{newCarController.searchResults}" var="car" border="1" rendered="#{newCarController.carList.isEmpty() == false}">
+            <h:dataTable value="#{newCarController.searchResults}" var="car" border="1" rendered="#{newCarController.searchResults.isEmpty() == false}">
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Reference Number"/>
