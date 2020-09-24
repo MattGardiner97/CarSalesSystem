@@ -65,28 +65,34 @@ public class CustomerOrderController {
         this.customerList = customerEJB.getCustomerList();
         this.carList = carEJB.getCarList();
     }
+    
+    public void orderList_PageLoad(){
+        this.customerOrderList = customerOrderEJB.getAllCustomerOrders();
+    }
+    
+    public String deleteOrder(long orderID)
+    {
+        this.customerOrderEJB.deleteByID(orderID);
+        return "/CustomerOrder/orderList.xhtml";
+    }
 
     //Getters & Setters
-    public CarSalesSystem.Entities.CustomerOrder getCustomerOrder() {
+    public CustomerOrder getCustomerOrder() {
         return customerOrder;
     }
 
-    public void setCustomerOrder(CarSalesSystem.Entities.CustomerOrder customerOrder) {
+    public void setCustomerOrder(CustomerOrder customerOrder) {
         this.customerOrder = customerOrder;
     }
 
-    public List<CarSalesSystem.Entities.CustomerOrder> getCustomerOrderList() {
-        customerOrderList = customerOrderEJB.getAllCustomerOrders();
+    public List<CustomerOrder> getCustomerOrderList() {
         return customerOrderList;
     }
 
     public void setCustomerOrderList(List<CustomerOrder> customerOrderList) {
         this.customerOrderList = customerOrderList;
-    }
-   
-        
+    } 
     
-
     /**
      * @return the customerList
      */

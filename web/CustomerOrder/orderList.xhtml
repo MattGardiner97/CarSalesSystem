@@ -7,36 +7,40 @@
         <title>Order Car List</title>
     </h:head>
     <h:body>
-        <h1>Order Car List</h1>
-        <hr/>
-        <h:dataTable value="#{customerOrderController.customerOrderList}" var="c" border="1">
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Order #"/>
-                </f:facet>
-                <h:outputText value="#{c.id}"/>
-            </h:column>
-            
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Customer Name"/>
-                </f:facet>
-                <h:outputText value="#{c.customer.name}"/>
-            </h:column>
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{customerOrderController.orderList_PageLoad}"/>
+        </f:metadata>
 
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Car"/>
-                </f:facet>
-                <h:outputText value="#{c.orderedCar.model}"/>
-            </h:column>
+        <h:form>
+            <h:dataTable value="#{customerOrderController.customerOrderList}" var="c" border="1">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Order #"/>
+                    </f:facet>
+                    <h:outputText value="#{c.id}"/>
+                </h:column>
 
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Quantity"/>
-                </f:facet>
-                <h:outputText value="#{c.quantity}"/>
-            </h:column>
-        </h:dataTable>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Customer Name"/>
+                    </f:facet>
+                    <h:outputText value="#{c.customer.name}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Car"/>
+                    </f:facet>
+                    <h:outputText value="#{c.orderedCar.toString()}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Action"/>
+                    </f:facet>
+                    <h:commandLink value="Delete" action="#{customerOrderController.deleteOrder(c.id)}"/>
+                </h:column>
+            </h:dataTable>
+        </h:form>
     </h:body>
 </html>

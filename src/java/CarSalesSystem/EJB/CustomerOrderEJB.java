@@ -44,4 +44,9 @@ public class CustomerOrderEJB {
         TypedQuery<CustomerOrder> query = em.createNamedQuery("orderFindId", CustomerOrder.class).setParameter("id", search);
         return query.getResultList();
     }
+    
+    public void deleteByID(long ID){
+        CustomerOrder order = em.find(CustomerOrder.class, ID);
+        em.remove(order);
+    }
 }
