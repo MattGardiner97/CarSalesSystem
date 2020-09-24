@@ -2,45 +2,59 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
-    <h:head>
-        <title>Order Car List</title>
-    </h:head>
-    <h:body>
-        <f:metadata>
-            <f:event type="preRenderView" listener="#{customerOrderController.orderList_PageLoad}"/>
-        </f:metadata>
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="/layout.xhtml">
+        <ui:define name="title">List of Car Orders</ui:define>
+        <ui:define name="header">List of Car Orders</ui:define>
 
-        <h:form>
-            <h:dataTable value="#{customerOrderController.customerOrderList}" var="c" border="1">
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Order #"/>
-                    </f:facet>
-                    <h:outputText value="#{c.id}"/>
-                </h:column>
+        <ui:define name="content">
+            <f:metadata>
+                <f:event type="preRenderView" listener="#{customerOrderController.orderList_PageLoad}"/>
+            </f:metadata>
 
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Customer Name"/>
-                    </f:facet>
-                    <h:outputText value="#{c.customer.name}"/>
-                </h:column>
+            <h:messages style="color:blue"/>
 
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Car"/>
-                    </f:facet>
-                    <h:outputText value="#{c.orderedCar.toString()}"/>
-                </h:column>
+            <h:form>
+                <h:dataTable value="#{customerOrderController.customerOrderList}" var="order" border="1" rendered="#{customerOrderController.customerOrderList.isEmpty() == false}">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Order #"/>
+                        </f:facet>
+                        <h:outputText value="#{order.id}"/>
+                    </h:column>
 
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Action"/>
-                    </f:facet>
-                    <h:commandLink value="Delete" action="#{customerOrderController.deleteOrder(c.id)}"/>
-                </h:column>
-            </h:dataTable>
-        </h:form>
-    </h:body>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Customer Name"/>
+                        </f:facet>
+                        <h:link value="#{order.customer.name}" outcome="/Customer/customerDetails.xhtml">
+                            <f:param name="customerID" value="#{order.customer.id}"/>
+                        </h:link>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Car"/>
+                        </f:facet>
+                        <h:link value="#{order.orderedCar.toString()}" outcome="#{customerOrderController.getCarLinkString(order.orderedCar)}">
+                            <f:param name="searchReferenceNumber" value="#{order.orderedCar.referenceNumber}"/>
+                        </h:link>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Action"/>
+                        </f:facet>
+                        <h:commandLink value="Delete" action="#{customerOrderController.deleteOrder(order.id)}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </ui:define>
+
+        <ui:define name="footer">
+            <h:link value="Create a car order" outcome="/CustomerOrder/createOrder.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
 </html>

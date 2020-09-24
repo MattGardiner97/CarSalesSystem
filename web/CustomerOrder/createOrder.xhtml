@@ -12,9 +12,6 @@
             <f:metadata>
                 <f:event type="preRenderView" listener="#{customerOrderController.createOrder_PageLoad}"/>
             </f:metadata>
-
-            <h1>Create a new car order</h1>
-            <hr/>
             <h:form>
                 <h:panelGrid columns="2" >
                     <h:outputLabel value="Customer:"/>
@@ -39,6 +36,8 @@
 
                 </h:panelGrid>
                 <h:commandButton value="Create a Car Order" action="#{customerOrderController.createCustomerOrder}" id="submit"/>
+                
+                <h:messages style="color:red"/>
             </h:form>
         </ui:define>
         
