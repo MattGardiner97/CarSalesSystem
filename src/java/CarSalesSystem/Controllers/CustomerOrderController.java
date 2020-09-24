@@ -2,7 +2,6 @@
 //Author: Jack Pashley - 12002954
 //Last modified: 16/9/2020
 //Purpose: Class representing a customer order entity
-
 package CarSalesSystem.Controllers;
 
 import CarSalesSystem.EJB.*;
@@ -18,12 +17,11 @@ import javax.faces.context.FacesContext;
 import javax.faces.flow.FlowScoped;
 import javax.inject.Named;
 
-
 @ManagedBean
-@Named(value="customerOrderController")
+@Named(value = "customerOrderController")
 @ViewScoped
 public class CustomerOrderController {
-    
+
     // Attributes             
     @EJB
     private CustomerOrderEJB customerOrderEJB;
@@ -31,47 +29,62 @@ public class CustomerOrderController {
     private CustomerEJB customerEJB;
     @EJB
     private CarEJB carEJB;
-    
+
     private CustomerOrder customerOrder = new CustomerOrder();
     private String details = "";
     private List<Customer> customerList;
     private List<Car> carList;
     private List<CustomerOrder> customerOrderList = new ArrayList<CustomerOrder>();
-    
-    public CustomerOrderController(){}
+
+    public CustomerOrderController() {
+    }
 
     // Public Methods           
     public String createCustomerOrder() {
         Car requestedCar = carEJB.findByID(customerOrder.getOrderedCar().getId());
-        if(customerOrder.getQuantity() > requestedCar.getQuantity())
-        {
+        Customer requestingCustomer = customerEJB.findByID(customerOrder.getCustomer().getId());
+        if (customerOrder.getQuantity() > requestedCar.getQuantity()) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "There are not enough vehicles in stock to fulfill your order.", null));
+            return null;
+        } else if (customerOrder.getQuantity() <= 0) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Order quantity must be greater than 0.", null));
             return null;
         }
         customerOrder = customerOrderEJB.createCustomerOrder(customerOrder);
-        customerOrderList = customerOrderEJB.getAllCustomerOrders();
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sucessfully created the order for ".concat(requestingCustomer.getName()), null));
+
         return "/CustomerOrder/orderList.xhtml";
     }
-    
+
     public void loadDetails() {
-        
+
     }
-    
-    public String performSearch(){
+
+    public String performSearch() {
         return "/CustomerOrder/searchResults.xhtml";
     }
     
-    public void createOrder_PageLoad(){
+    public String getCarLinkString(Car Target){
+        if(Target instanceof NewCar)
+            return "/NewCar/searchResults.xhtml";
+        else
+            return "/UsedCar/searchResults.xhtml";
+    }
+
+    public void createOrder_PageLoad() {
         this.customerList = customerEJB.getCustomerList();
         this.carList = carEJB.getCarList();
     }
-    
-    public void orderList_PageLoad(){
+
+    public void orderList_PageLoad() {
         this.customerOrderList = customerOrderEJB.getAllCustomerOrders();
+        if (this.customerOrderList.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No orders found.", null));
+
+        }
     }
-    
-    public String deleteOrder(long orderID)
-    {
+
+    public String deleteOrder(long orderID) {
         this.customerOrderEJB.deleteByID(orderID);
         return "/CustomerOrder/orderList.xhtml";
     }
@@ -91,8 +104,8 @@ public class CustomerOrderController {
 
     public void setCustomerOrderList(List<CustomerOrder> customerOrderList) {
         this.customerOrderList = customerOrderList;
-    } 
-    
+    }
+
     /**
      * @return the customerList
      */
@@ -121,5 +134,4 @@ public class CustomerOrderController {
         this.carList = carList;
     }
 
-    
 }
