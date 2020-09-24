@@ -30,6 +30,8 @@ public class CustomerEJB {
     }
       
     public Customer findByID(long ID){
-        return em.find(Customer.class, ID);
+        Customer customer = em.find(Customer.class, ID);
+        em.refresh(customer);
+        return customer;
     }
 }
