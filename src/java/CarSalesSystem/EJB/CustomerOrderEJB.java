@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 import CarSalesSystem.Entities.CustomerOrder;
+import java.util.Date;
 
 @Stateless
 public class CustomerOrderEJB {
@@ -23,6 +24,7 @@ public class CustomerOrderEJB {
 
     //Creates the list to search through and presist
     public CustomerOrder createCustomerOrder(CustomerOrder order) {
+        order.setCreatedAt(new Date());
         em.persist(order);
         car = em.find(Car.class, order.getOrderedCar().getId());
         car.setQuantity(car.getQuantity() - order.getQuantity());
@@ -44,9 +46,12 @@ public class CustomerOrderEJB {
         TypedQuery<CustomerOrder> query = em.createNamedQuery("orderFindId", CustomerOrder.class).setParameter("id", search);
         return query.getResultList();
     }
-    
-    public void deleteByID(long ID){
+
+    public void deleteByID(long ID) {
         CustomerOrder order = em.find(CustomerOrder.class, ID);
+        Car orderedCar = em.find(Car.class, order.getOrderedCar().getId());
+        orderedCar.setQuantity(orderedCar.getQuantity() + order.getQuantity());
+        em.merge(orderedCar);
         em.remove(order);
     }
 }
