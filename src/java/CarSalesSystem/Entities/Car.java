@@ -5,6 +5,8 @@
 package CarSalesSystem.Entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
 
@@ -63,9 +65,13 @@ public class Car implements Serializable {
     
     @Column(nullable = false)
     private int quantity;
+    
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+    private List<CustomerOrder> customerOrders;
 
     //Default constructor
     public Car() {
+        this.customerOrders = new ArrayList<CustomerOrder>();
     }
 
     /**
@@ -276,6 +282,20 @@ public class Car implements Serializable {
      */
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    /**
+     * @return the customerOrders
+     */
+    public List<CustomerOrder> getCustomerOrders() {
+        return customerOrders;
+    }
+
+    /**
+     * @param customerOrders the customerOrders to set
+     */
+    public void setCustomerOrders(List<CustomerOrder> customerOrders) {
+        this.customerOrders = customerOrders;
     }
 
 }
