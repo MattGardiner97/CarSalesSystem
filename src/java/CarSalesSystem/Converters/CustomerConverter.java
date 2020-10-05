@@ -1,8 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Filename: CustomerConvert.java
+//Purpose: Converter class for converting between Customer and String
 
 package CarSalesSystem.Converters;
 
@@ -16,20 +13,15 @@ import javax.faces.convert.FacesConverter;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-/**
- *
- * @author jackp
- */
 @FacesConverter(value = "customerConverter")
 public class CustomerConverter implements Converter{
     
     @PersistenceContext(unitName = "CarSalesSystemPU")
     private EntityManager em;
     
+    //Convert the Customer object to String representation
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object modelValue) {
-        
-        System.out.println("HERE!");
         
         if (modelValue == null) {
             return "";
@@ -42,6 +34,7 @@ public class CustomerConverter implements Converter{
         }
     }
     
+    //Convert the String representation to its original Customer object
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String submittedValue) {
         System.out.println(submittedValue);
@@ -56,7 +49,7 @@ public class CustomerConverter implements Converter{
             return result;
            
         } catch (NumberFormatException e) {
-            throw new ConverterException(new FacesMessage(submittedValue + " is not a valid Warehouse ID"), e);
+            throw new ConverterException(new FacesMessage(submittedValue + " is not a valid Customer ID"), e);
         }
     }
     

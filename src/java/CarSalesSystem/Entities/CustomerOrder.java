@@ -1,16 +1,13 @@
-//File: CustomerOrder.java
-//Author: Jack Pashley - 12002954
-//Co-Author: Matthew Gardiner - s0270923
-//Last modified: 16/9/2020
-//Purpose: Class representing a customer order entity
+//Filename: CustomerOrder.java
+//Purpose: Entity representing an order for a car made by a customer
 package CarSalesSystem.Entities;
 
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
+//Named queries
 @Entity
-
 @NamedQueries({
     @NamedQuery(name = "orderFindAll", query = "SELECT o FROM CustomerOrder o"), //Finds all orders
     @NamedQuery(name = "orderFindId", query = "SELECT o FROM CustomerOrder o WHERE o.id = :id"), //Finds an order by order number

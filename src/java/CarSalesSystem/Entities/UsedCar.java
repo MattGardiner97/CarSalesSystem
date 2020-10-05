@@ -1,13 +1,11 @@
-//File: UsedCar.java
-//Author: Matthew Gardiner - s0270923
-//Last modified: 16/8/2020
-//Purpose: Subclass of the Car class representing a used car
+//Filename: UsedCar.java
+//Purpose: Entity representing a used Car
 package CarSalesSystem.Entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import javax.persistence.*;
 
+//Named queries
 @Entity
 @NamedQueries({
     @NamedQuery(name = "usedCarFindAll", query = "SELECT c FROM UsedCar c"), //Retrieves all cars from the database
@@ -16,8 +14,6 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED) //Indicates to use the joined-subclass strategy
 public class UsedCar extends Car implements Serializable {
 
-    
-    
     @Column(nullable = false)
     private int odometer;
 

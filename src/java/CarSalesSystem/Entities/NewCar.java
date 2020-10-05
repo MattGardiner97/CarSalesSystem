@@ -1,12 +1,11 @@
-//File: NewCar.java
-//Author: Matthew Gardiner - s0270923
-//Last modified: 16/8/2020
-//Purpose: Subclass of the Car class representing a new car
+//Filename: NewCar.java
+//Purpose: Entity representing a brand new Car
 package CarSalesSystem.Entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
 
+//Named queries
 @Entity
 @NamedQueries({
     @NamedQuery(name = "newCarFindAll", query = "SELECT c FROM NewCar c"), //Retrieves all cars from the database

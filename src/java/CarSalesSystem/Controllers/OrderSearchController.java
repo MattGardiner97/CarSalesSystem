@@ -1,3 +1,6 @@
+//Filename: OrderSearchController.java
+//Purpose: Backing bean providing search functionality for Order entities
+
 package CarSalesSystem.Controllers;
 
 import javax.ejb.EJB;
@@ -8,18 +11,15 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import CarSalesSystem.Entities.Customer;
-import CarSalesSystem.EJB.CustomerEJB;
 import CarSalesSystem.EJB.CustomerOrderEJB;
 import CarSalesSystem.Entities.CustomerOrder;
-import javax.faces.component.UIComponent;
-import javax.faces.convert.ConverterException;
 
 @ManagedBean
 @Named(value = "orderSearchController")
 @RequestScoped
 public class OrderSearchController {
 
+    //Attributes
     @EJB
     private CustomerOrderEJB orderEJB;
     
@@ -27,13 +27,16 @@ public class OrderSearchController {
     private List<CustomerOrder> searchResults = new ArrayList<CustomerOrder>();
     
     public String performSearch(){
+        //Get search results by ID
         this.searchResults = orderEJB.searchById(this.getSearchID());
-        System.out.println(this.searchResults.size());
+        
+        //Add error message if search results are empty
         if (this.searchResults.isEmpty()) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No order results found for: ".concat(Long.toString(getSearchID())), null));
         }
+        
+        //Redirect to search results page
         return "/CustomerOrder/searchResults.xhtml";
-    
     }
 
     /**

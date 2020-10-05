@@ -1,7 +1,5 @@
-//File: Customer.java
-//Author: Matthew Gardiner - s0270923
-//Last modified: 16/8/2020
-//Purpose: Class representing a customer entity
+//Filename: Customer.java
+//Purpose: Customer entity
 package CarSalesSystem.Entities;
 
 import java.io.Serializable;
@@ -10,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
 
+//Named Queries
  @Entity
 @NamedQueries({
     @NamedQuery(name = "customerFindAll", query = "SELECT c FROM Customer c") //Finds all customers

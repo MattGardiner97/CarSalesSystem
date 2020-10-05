@@ -1,8 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Filename: UsedCarController.java
+//Purpose: Backing bean for UsedCar operations
 package CarSalesSystem.Controllers;
 
 import CarSalesSystem.EJB.CarEJB;
@@ -12,20 +9,16 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-/**
- *
- * @author Matt
- */
 @ManagedBean
 @Named(value = "usedCarController")
 @RequestScoped
 public class UsedCarController {
 
+    //Attributes
     @EJB
     private CarEJB carEJB;
     private UsedCar car = new UsedCar();
@@ -38,27 +31,41 @@ public class UsedCarController {
     }
 
     public String createCar() {
+        //Set the quantity to 1
         car.setQuantity(1);
+        
+        //Create the car using the EJB
         carEJB.createCar(car);
+        
+        //Add success message
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully created used car: ".concat(car.toString()), null));
+        
+        //Redirect to used car list
         return "/UsedCar/listUsedCars.xhtml";
     }
 
     public void loadCarList() {
+        //Get car list from EJB
         this.carList = carEJB.getUsedCarList();
+        
+        //Add error message if car list is empty
         if (this.carList.isEmpty()) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No used cars found ", null));
         }
     }
 
     public void loadSearchResults() {
+        //Get search results from EJB
         this.searchResults = carEJB.searchUsedCarByReferenceNumber(this.searchReferenceNumber);
+        
+        //Add error message if search results are empty
         if (this.searchResults.isEmpty()) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No car found for reference number: ".concat(searchReferenceNumber), null));
         }
     }
 
     public String performSearch() {
+        //Redirect to search results page
         return "/UsedCar/searchResults.xhtml";
     }
 
